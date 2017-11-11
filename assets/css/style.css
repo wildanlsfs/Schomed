@@ -1,0 +1,342 @@
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	font-family: "Lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: black;
+	background-color: white;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 35px;
+	text-transform: uppercase;
+	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+p {
+	margin: 0 0 25px;
+	font-size: 18px;
+	line-height: 1.5;
+}
+@media (min-width: 768px) {
+	p {
+		margin: 0 0 35px;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+}
+a {
+	color: #038d3d;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+a:hover,
+a:focus {
+	text-decoration: none;
+	color: #ddd;
+}
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+  font-size: 30px;
+}
+blockquote p {
+  display: inline;
+}
+.light {
+  	font-weight: 400;
+}
+
+/*Navbar*/
+.navbar-custom {
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	text-transform: uppercase;
+	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: #e0e0e0;
+}
+.navbar-custom .navbar-toggle {
+	color: white;
+	background-color: rgba(0, 0, 0, 0.2);
+	font-size: 12px;
+}
+.navbar-custom .navbar-toggle:focus,
+.navbar-custom .navbar-toggle:active {
+  	outline: none;
+}
+.navbar-custom .navbar-brand {
+  	font-weight: 700;
+}
+.navbar-custom .navbar-brand:focus {
+  	outline: none;
+}
+.navbar-custom a {
+  	color: grey;
+}
+.navbar-custom .nav li a {
+	-webkit-transition: background 0.3s ease-in-out;
+	-moz-transition: background 0.3s ease-in-out;
+	transition: background 0.3s ease-in-out;
+}
+.navbar-custom .nav li a:hover {
+	color: rgba(100, 100, 100, 0.8);
+	outline: none;
+	background-color: white;
+}
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active {
+	outline: none;
+	background-color: white;
+}
+.navbar-custom .nav li.active {
+  	outline: none;
+}
+.navbar-custom .nav li.active a {
+  	background-color: #eee;
+}
+.navbar-custom .nav li.active a:hover {
+  	color: grey;
+}
+@media (min-width: 768px) {
+	.navbar-custom {
+		padding: 5px 0;
+		border-bottom: none;
+		letter-spacing: 1px;
+		background-color: rgba(200,200,200, 0.7);
+		-webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+		-moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+		transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+	}
+	.navbar-custom.top-nav-collapse {
+		padding: 0;
+		background: white;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	}
+}
+
+/*Header*/
+.intro {
+	display: table;
+	padding-top: 100px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	color: black;
+	background: url(../img/1252847862.jpg) no-repeat center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+.intro .intro-body {
+	background-color: rgba(200,200,200, 0.5);
+	height: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+.intro .intro-body .brand-heading {
+  	font-size: 40px;
+}
+.intro .intro-body .intro-text {
+  	font-size: 18px;
+}
+@media (min-width: 768px) {
+	.intro {
+		height: 100%;
+		padding: 0;
+	}
+	.intro .intro-body{
+		height: auto;
+	}
+	.intro .intro-body .brand-heading {
+		font-size: 100px;
+	}
+	.intro .intro-body .intro-text {
+		font-size: 26px;
+	}
+}
+
+.btn-dark {
+    border-radius: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}	
+
+#to-top {
+  display: block;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+
+.galery-big{
+	width: 100%;
+	padding: 5%;
+}
+
+.galery-big-item{
+	width: 50%;
+}
+
+.galery-small{
+	width: 100%;
+}
+
+.galery-small-item{
+	width: 15%;
+	margin: 0 5px;
+}
+
+@media (min-width: 768px) {
+	.galery-big{
+		width: 100%;
+		padding: 5%;
+	}
+
+	.galery-big-item{
+		width: 30%;
+	}
+}
+
+.authpage{
+	margin: 0px;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(200,200,200, 0.5);
+	color: #038d3d;
+	text-align: center;
+	/*overflow: auto; */
+}
+
+.authpage-inner{
+	margin: auto;
+	padding: 10px;
+	background-color: white;
+	height: auto;
+	width: 100%;
+	box-shadow: 5px 5px 2px #888888;
+}
+
+.authpage-button{
+	transition-duration: 0.5s;
+	padding: 10px;
+	width: 100%;
+	color: #FFF;
+  	background: #038d3d;
+  	border: none;
+  	font-weight: bold;
+  	font-size: 15px;
+}
+
+.authpage-button:hover{
+	transition-duration: 0.5s;
+	color: #038d3d;
+  	background: #DDD;
+  	cursor: pointer;
+}
+
+.authpage-content{
+	padding: 20px;
+}
+
+@media (min-width: 768px) {
+	.authpage{
+		margin: 0px;
+		width: 100%;
+		min-height: 100vh;
+		height: auto;
+		background-color: rgba(200,200,200, 0.5);
+		color: #038d3d;
+		text-align: center;
+		padding-top: 10vh;
+		padding-bottom: 10vh;
+		overflow: visible; 
+	}
+
+	.authpage-inner{
+		margin: auto;
+		padding: 10px;
+		background-color: white;
+		height: auto;
+		width: 80vh;
+		box-shadow: 5px 5px 2px #888888;
+	}
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+.custom-label {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+  font-size: 20px;
+  width: 45%;
+}
+
+input[type=radio]:checked + label {
+  color: #FFF;
+  background: #038d3d;
+}
+
+.radio-group {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+}
+
+.inputfile{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	transition-duration: 0.5s;
+	padding: 10px;
+	width: 100%;
+	color: #FFF;
+  	background: #038d3d;
+  	border: none;
+  	font-weight: bold;
+  	font-size: 15px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    transition-duration: 0.5s;
+	color: #038d3d;
+  	background: #DDD;
+  	cursor: pointer;
+
+}
+
+i.errormessage{
+	color: #FF0000;
+}

@@ -1,0 +1,46 @@
+Siswa perorang
+	Nama Lengkap
+	Alamat
+	Jenis Kelamin	
+	Asal Sekolah
+	Kelas/Tingkatan
+	No Telp
+	Email
+	ID Line
+	<>Status(akan berjalan, sedang berjalan, selesai, batal)
+	<>
+
+Nama Lengkap *
+Asal Universitas *
+Program Studi *
+Alamat Lengkap *
+No. Telepon *
+Email *
+ID LINE *
+WhatsApp *
+Prestasi 5 Tahun Terakhir *
+
+IPK Terakhir *
+
+Alasan Menjadi Tutor di Schomed Indonesia *
+
+Mata Pelajaran yang Ingin Diajarkan *
+	Matematika
+	Bahasa Indonesia
+	Bahasa Inggris
+	Biologi
+	Fisika
+	Kimia
+	TPA
+	IPA Terpadu
+
+Dari mana Anda mengetahui Schomed Indonesia? *
+
+Preferensi Lokasi Mengajar *
+	Rayon I (Kec. Biringkanaya, Kec. Tamalanrea)
+	Rayon II (Kec. Panakkukang, Kec. Manggala)
+	Rayon III (Kec. Rappocini, Kec. Tamalate, Kec. Mamajang)
+	Rayon IV (Kec. Makassar, Kec. Ujung Pandang, Kec. Mariso)
+	Rayon V (Kec. Wajo, Kec. Bontoala, Kec. Ujung Tanah, Kec. Tallo)
+
+Preferensi Hari Mengajar

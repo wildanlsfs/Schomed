@@ -1,0 +1,36 @@
+Calon Siswa
+	Status: sedang berjalan
+		akan berjalan
+		selesai
+		batal
+
+	Daftar 
+		tentukan biaya paket
+		tentukan mapel(maks 3 mapel, yang harus sesuai dengan banyaknya pertemuan yang disetujui)
+		billing pembayaran
+	setelah daftar, terdapat batas 7 hari untuk pembayaran, diluar 7 hari dianggap batal
+
+Siswa 
+	Memilih jadwal
+	route
+		Pilih tutor berdasarkan referensi sifat, pekerjaan, atau cara mengajar
+	terdapat lembar integrasi
+	memberikan Rating kepada tutor
+	
+Calon Tutor
+	Isi data(tutor dapat mengajar di 3 mata pelajaran yang berbeda)
+	Upload prestasi
+	Test kemampuan mengajar
+
+Tutor 
+	Menerima Murid
+	Gaji Sesuai dengan Rating
+	mengisi lembar integrasi
+
+Admin	
+	Konfirmasi Siswa
+	Konfirmasi Tutor
+	Memantau akun tentor dan siswa
+
+Penulis blog
+	Menuliskan article
