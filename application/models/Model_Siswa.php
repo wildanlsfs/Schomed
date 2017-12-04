@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_Siswa extends CI_Model{
 	
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->load->library('encryption');
+	}
+
 	public function getData($id)
 	{
 
@@ -16,15 +23,15 @@ class Model_Siswa extends CI_Model{
 
 		if ($query->num_rows() == 1) 
 		{
-			return $query->result();
+			return $query->row();
 		} 
 		else 
 		{
-			return false;
+			return -1;
 		}
 	}
 
-	public function checkData1($data)
+	public function checkData1($id)
 	{
 		$condition = "ID =" . "'" . $id . "'";
 		$this->db->select('NamaLengkap');
@@ -33,75 +40,100 @@ class Model_Siswa extends CI_Model{
 		$this->db->limit(1);
 		
 		$query = $this->db->get();
+		$query = $query->row();
 
-		if ($query->num_rows() == 1) 
+		if ($query->NamaLengkap != NULL) 
 		{
-			return TRUE;
+			return 1;
 		} 
 		else 
 		{
-			return false;
+			return -1;
 		}
 	}
 
-	public function checkData2($data)
+	public function checkData2($id)
+	{
+		$condition = "IDSiswa =" . "'" . $id . "'";
+		$this->db->select('BuktiPembayaran');
+		$this->db->from('waiting_list');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		
+		$query = $this->db->get();
+		$query = $query->row();
+
+		if ($query->BuktiPembayaran != NULL) 
+		{
+			return 1;
+		} 
+		else 
+		{
+			return -1;
+		}
+	}
+
+	public function checkData3($id)
 	{
 		$condition = "ID =" . "'" . $id . "'";
-		$this->db->select('BuktiPembayaran');
+		$this->db->select('Status');
 		$this->db->from('siswa');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		
 		$query = $this->db->get();
-
-		if ($query->num_rows() == 1) 
-		{
-			return TRUE;
-		} 
-		else 
-		{
-			return false;
-		}
+		$row = $query->row();
+		
+		return $row->Status;
 	}
 
 	public function fillData1($data)
-	{
-		$condition = "ID =" . "'" . $id . "'";
-		$this->db->select('*');
-		$this->db->from('siswa');
+	{	
+		$condition = "ID =" . "'" . $_SESSION['ID'] . "'";
+		$this->db->set($data);
 		$this->db->where($condition);
-		$this->db->limit(1);
-		
-		$query = $this->db->get();
+		$this->db->update('siswa');
 
-		if ($query->num_rows() == 1) 
-		{
-			
+		if ($this->db->affected_rows() > 0) {
 			return TRUE;
-		} 
-		else 
-		{
-			return false;
 		}
+		else {
+			return FALSE;
+		}
+	}
+
+	public function addToWaitingList($data)
+	{
+		$condition = "IDSiswa =" . "'" . $_SESSION['ID'] . "'";
+		$this->db->set($data);
+		$this->db->where($condition);
+		$this->db->update('waiting_list');
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
+	public function addCourse($data)
+	{
+		return $this->db->insert('jadwal',$data);
 	}
 
 	public function fillData2($data)
 	{
-		$condition = "ID =" . "'" . $id . "'";
-		$this->db->select('*');
-		$this->db->from('siswa');
+		$condition = "IDSiswa =" . "'" . $_SESSION['ID'] . "'";
+		$this->db->set($data);
 		$this->db->where($condition);
-		$this->db->limit(1);
-		
-		$query = $this->db->get();
+		$this->db->update('waiting_list');
 
-		if ($query->num_rows() == 1) 
-		{
+		if ($this->db->affected_rows() > 0) {
 			return TRUE;
-		} 
-		else 
-		{
-			return false;
+		}
+		else {
+			return FALSE;
 		}
 	}
 }

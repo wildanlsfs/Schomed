@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="author" content="Hery Nugroho dan Wildan Lutfi">
     <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png" type="image/x-icon"/>
 
-	<title>Schomed Indonesia - Sign Up</title>
+	<title>Schomed Indonesia - Waiting For Confirmation</title>
 
 	<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet">
@@ -28,11 +28,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="authpage">
 		<div class="authpage-inner well well-lg">
 			<br>
-			<h1>Hello <?php echo $username?>!</h1>
+			<h1>Hello <?php 
+				if(isset($_SESSION['username'])){	
+					echo $_SESSION['username'];
+				}?>!</h1>
 			<br>
 			<h3>Data Anda Sedang Dikonfirmasi, Pemberitahuan Selanjutnya Melalui Email</h3>
 			<br>
 			<i>Jika tidak mendapatkan email, harap hubungi 0896-2956-8164</i>
+			<br>
+			<a href="<?php echo base_url();?>" style="color: #fff;"><button class="authpage-button">Home</button></a>
 		</div>
 	</div>
 
@@ -41,7 +46,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url();?>assets/js/script.js"></script>
     <script src="<?php echo base_url();?>assets/js/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 </body>
 </html>
 

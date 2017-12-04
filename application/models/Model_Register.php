@@ -15,7 +15,7 @@ class Model_Register extends CI_Model {
 		
 		$condition = "Email =" . "'" . $data['Email'] . "'";
 		$this->db->select('*');
-		$this->db->from('auth_siswa');
+		$this->db->from('siswa');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		
@@ -23,13 +23,13 @@ class Model_Register extends CI_Model {
 		
 		if ($query->num_rows() == 0) {
 
-			$this->db->insert('auth_siswa', $data);
+			$this->db->insert('siswa', $data);
 
 			if ($this->db->affected_rows() > 0) {
 
 				$condition = "Email =" . "'" . $data['Email'] . "'";
 				$this->db->select('ID');
-				$this->db->from('auth_siswa');
+				$this->db->from('siswa');
 				$this->db->where($condition);
 				$this->db->limit(1);
 				
@@ -44,25 +44,25 @@ class Model_Register extends CI_Model {
 				$date2 = $date2->format('Y-m-d H:i:s');
 
 				$tanggal = array(
-					'ID_siswa'				=> $result->ID,
-					'TanggalDaftar' 		=> $date1,
+					'IDSiswa'				=> $result->ID,
+					'TanggalPendaftaran' 	=> $date1,
 					'MaksimalPembayaran'	=> $date2 
 					);
 
-				$this->db->insert('siswa', $tanggal);
+				$this->db->insert('waiting_list', $tanggal);
 
 				if($this->db->affected_rows() == 1){
-					return true;
+					return 1;
 				}
 				else{
-					return false;	
+					return -1;	
 				}
 
 			}
 		} 
 		else 
 		{
-			return false;
+			return -1;
 		}
 	}
 
@@ -71,7 +71,7 @@ class Model_Register extends CI_Model {
 		
 		$condition = "Email =" . "'" . $data['Email'] . "'";
 		$this->db->select('*');
-		$this->db->from('auth_tentor');
+		$this->db->from('tentor');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		
@@ -79,45 +79,24 @@ class Model_Register extends CI_Model {
 		
 		if ($query->num_rows() == 0) {
 
-			$this->db->insert('auth_tentor', $data);
+			$date1 = new DateTime();
+			$date2 = new DateTime('1 week');
+			
+			$data['TanggalDaftar'] = $date1->format('Y-m-d H:i:s');
+			$data['MaksimalKonfirmasi'] = $date2->format('Y-m-d H:i:s');
 
-			if ($this->db->affected_rows() > 0) {
-				$condition = "Email =" . "'" . $data['Email'] . "'";
-				$this->db->select('ID');
-				$this->db->from('auth_tentor');
-				$this->db->where($condition);
-				$this->db->limit(1);
-				
-				$query = $this->db->get();
+			$this->db->insert('tentor', $data);
 
-				$result = $query->row();
-
-				$date1 = new DateTime();
-				$date1 = $date1->format('Y-m-d H:i:s');
-
-				$date2 = new DateTime('1 week');
-				$date2 = $date2->format('Y-m-d H:i:s');
-
-				$tanggal = array(
-					'IDTentor'				=> $result->ID,
-					'TanggalDaftar' 		=> $date1,
-					'MaksimalKonfirmasi'	=> $date2 
-					);
-
-				$this->db->insert('tentor', $tanggal);
-				
-				if($this->db->affected_rows() == 1){
-					return true;
-				}
-				else{
-					return false;	
-				}
+			if($this->db->affected_rows() == 1){
+				return 1;
+			}
+			else{
+				return -1;	
 			}
 		} 
 		else 
 		{
-			return false;
+			return -1;
 		}
-	}	
-
+	}
 }

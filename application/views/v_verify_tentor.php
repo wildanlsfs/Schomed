@@ -28,15 +28,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="authpage">
 		<div class="authpage-inner well well-lg">
 			<br>
-			<h1>Hello <?php echo $username?>!</h1>
+			<h1>Hello <?php if(isset($_SESSION['username'])){
+				echo $_SESSION['username'];
+				}?>!
+			</h1>
 			<h3>Tolong Unggah Bukti Prestasi Anda Disini!</h3>
 			
-			<i><?php echo $error;?></i>
+			<?php  if($error = $this->session->flashdata('error')): ?>
+				<i style="color: #F00;"><?php  echo $error;?></i>
+			<?php  endif;?>
 			<br>
 			<i>Unggah bukti prestasi anda dalam kurun waktu maksimal 7 hari, lalu upload bukti prestasi disini!</i>
 			<br>
 			<br>
-			<?php echo form_open_multipart('upload/do_upload');?>
+			<?php echo form_open_multipart('Registration/uploadAchievement');?>
 				<input type="file" name="userfile" id="userfile" class="inputfile" size="20" required />
 				<label for="userfile" id="choose">PILIH BERKAS</label><br><br>
 				<button type="submit" class="authpage-button">SELANJUTNYA</button>

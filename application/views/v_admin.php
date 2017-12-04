@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="author" content="Hery Nugroho dan Wildan Lutfi">
     <link rel="icon" href="<?php echo base_url();?>assets/img/icon.png" type="image/x-icon"/>
 
-	<title>Schomed Indonesia</title>
+	<title>Administrasi</title>
 
 	<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet">
@@ -23,38 +23,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
-	<!-- Panel -->
-
-	<div class="authpage">
-		<div class="authpage-inner well well-lg">
-			<br>
-			<h1>Hello <?php echo $username?>!</h1>
-			<h3>Silahkan memilih mata pelajaran, jadwal, dan tentornya!	</h3>
-			
-			<i><?php echo $error;?></i>
-			<br>
-			<?php echo form_open_multipart('');?>
-				<input type="file" name="userfile" id="userfile" class="inputfile" size="20" required />
-				<label for="userfile" id="choose">PILIH FILE</label><br><br>
-				<button type="submit" class="authpage-button">NEXT</button>
-			</form>
-		</div>
-	</div>
+	
 
 	<!-- Script -->
 	<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url();?>assets/js/script.js"></script>
-	<script>
-		$(document).ready(function (){
-			$('#userfile').change(function(e){
-				var fileName = e.target.files[0].name;
-				$('#choose').html("Anda Memilih " + fileName)
-			});
-		});
-	</script>
     <script src="<?php echo base_url();?>assets/js/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+    <script src="<?php echo base_url();?>assets/js/jquery.validate.min.js"></script>
 </body>
 </html>
 

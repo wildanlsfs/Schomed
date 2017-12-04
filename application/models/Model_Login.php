@@ -2,23 +2,32 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_Login extends CI_Model {
+	
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->load->library('encryption');
+	}
 
 	public function loginSiswa($data)
 	{
 		$condition = "Email =" . "'" . $data['Email'] . "' AND " . "Pass =" . "'" . $data['Pass'] . "'";
 		$this->db->select('*');
-		$this->db->from('auth_siswa');
+		$this->db->from('siswa');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();
+		
 
 		if ($query->num_rows() == 1) 
 		{
-			return true;
+			$row = $query->row();
+			return $row->ID;
 		} 
 		else 
 		{
-			return false;
+			return -1;
 		}
 	}	
 
@@ -26,50 +35,20 @@ class Model_Login extends CI_Model {
 	{
 		$condition = "Email =" . "'" . $data['Email'] . "' AND " . "Pass =" . "'" . $data['Pass'] . "'";
 		$this->db->select('*');
-		$this->db->from('auth_tentor');
+		$this->db->from('tentor');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();
+		
 
 		if ($query->num_rows() == 1) 
 		{
-			return true;
+			$row = $query->row();
+			return $row->ID;
 		} 
 		else 
 		{
-			return false;
-		}
-	}
-
-	public function getIDTentor($data)
-	{
-		$condition = "Email =" . "'" . $data['Email'] . "' AND " . "Pass =" . "'" . $data['Pass'] . "'";
-		$this->db->select('*');
-		$this->db->from('auth_tentor');
-		$this->db->where($condition);
-		$this->db->limit(1);
-		$query = $this->db->get();
-		$data = $query->result_array();
-
-		if ($query->num_rows() == 1) 
-		{
-			return $query[0]['ID'];
-		}
-	}
-
-	public function getIDSiswa($data)
-	{
-		$condition = "Email =" . "'" . $data['Email'] . "' AND " . "Pass =" . "'" . $data['Pass'] . "'";
-		$this->db->select('*');
-		$this->db->from('auth_siswa');
-		$this->db->where($condition);
-		$this->db->limit(1);
-		$query = $this->db->get();
-		$data = $query->result_array();
-
-		if ($query->num_rows() == 1) 
-		{
-			return $query[0]['ID'];
+			return -1;
 		}
 	}
 

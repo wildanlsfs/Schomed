@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div id="errorPass"></div>
 				</div>
 				<div class="form-group">
-					<label for="pass">Konfirmasi Password</label>
+					<label for="pass2">Konfirmasi Password</label>
 					<input id="pass2" type="password" class="form-control" name="pass2" placeholder="Konfirmasi Password" required title="Masukkan Password yang Sama">
 					<div id="errorPass2"></div>
 				</div>
@@ -102,7 +102,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    $('input[type=radio][name=selector]').change(function() {
 	        if (this.value == 'tentor') {
 	            $("#kebijakan").hide(100);
-	            $('input[type=checkbox][name=cek]').
 	        }
 	        else{
 	            $("#kebijakan").show(100);

@@ -12,6 +12,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		session_destroy();
 		$this->load->view('v_home');
 	}
 
@@ -32,29 +33,7 @@ class Home extends CI_Controller {
 		}
 	}
 
-	public function coba()
-	{
-		$this->load->model('Model_Siswa');
-
-		$data = $this->Model_Siswa->getDataSiswa();
-		foreach ($data as $siswa) {
-			echo "Nama : ".$siswa['NamaLengkap']."<br/>";
-			echo "Alamat : ".$siswa['Alamat']."<hr/>";
-		}
-	}
-
-	public function query()
-	{
-		$data = array(
-			'email' => ''
-		);
-		$this->db->select('ID');
-		$this->db->from('auth_siswa');
-		$this->db->where('email', $data['email']);
-		$query = $this->db->get();
-
-		$result = $query->result_array();
-
-		echo $result[0];
+	public function contact_Us(){
+		//
 	}
 }

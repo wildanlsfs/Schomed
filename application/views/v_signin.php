@@ -29,13 +29,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="authpage-inner well well-lg">
 			<br>
 			<h1>MASUK SEBAGAI</h1>
+			
 			<form id="form-validation" action="<?php echo base_url()?>signin_redirect" class="authpage-form" method="post">
 				<div class="radio-group">
 					<input type="radio" value="siswa" id="option-one" name="selector" checked>
 					<label class="custom-label" for="option-one">SISWA</label>
 					<input type="radio" value="tentor" id="option-two" name="selector">
 					<label class="custom-label" for="option-two">TENTOR</label>
-					</div>
+				</div>
+				<?php  if($error = $this->session->flashdata('error')): ?>
+					<i style="color: #F00;"><?php  echo $error;?></i>
+				<?php  endif;?>
 					<hr>
 				<div class="form-group">
 					<label for="email">Alamat Surat Elektronik</label>

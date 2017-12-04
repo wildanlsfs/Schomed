@@ -28,9 +28,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="authpage">
 		<div class="authpage-inner well well-lg">
 			<br>
-			<h1>Hello <?php echo $username?>!</h1>
+			<h1>Hello!</h1>
 			<h3>Tolong Lengkapi Data Anda!</h3>
-			<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>fill_teacher_data_2">
+			<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>achievement">
 				<div class="form-group">
 					<label for="fname">Nama Lengkap</label>
 					<input type="text" class="form-control" name="fname" placeholder="Nama Lengkap" required pattern="[A-Za-z].{4,}" title="Nama Minimal 4 Karakter Alphabet">
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 				<div class="form-group">
 					<label for="notelp">No Telepon</label>
-					<input type="text" class="form-control" name="notelp" placeholder="No Telepon (cth:+628**********)" required pattern="[0-9]{10,14}" title="Masukka Minimal 10 Angka dan Maksimal 12 Angka">
+					<input type="text" class="form-control" name="notelp" placeholder="No Telepon (cth:08**********)" required pattern="[0-9]{10,14}" title="Masukkan Minimal 10 Angka dan Maksimal 12 Angka">
 					<div id="field3"></div>
 				</div>
 				<div class="form-group">
@@ -73,28 +73,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<br>
 					<br>
 					<div style="text-align: left; margin-left: 4%; color: black;">
-						<input type="checkbox" name="program1" value="yes">
+						<input type="checkbox" name="program1" value="osnreguler">
 						<label for="program1">Kelas OSN Reguler</label>
 						<br>
-						<input type="checkbox" name="program2" value="yes">
+						<input type="checkbox" name="program2" value="osnintensif">
 						<label for="program2">Kelas OSN Intensif</label>
 						<br>
-						<input type="checkbox" name="program3r" value="yes">
+						<input type="checkbox" name="program3" value="sbmptnreguler">
 						<label for="program3">Kelas SBMPTN Reguler</label>
 						<br>
-						<input type="checkbox" name="program4" value="yes">
-						<label for="program4">Kelas SBMPTN Intensif</label>
+						<input type="checkbox" name="program4" value="sbmptnintensif">
+						<label for="sbmptnintensif">Kelas SBMPTN Intensif</label>
 						<br>
-						<input type="checkbox" name="program5" value="yes" checked disabled>
+						<input type="checkbox" name="program5" value="persiapanreguler" checked required>
 						<label for="program5">Kelas Persiapan Reguler</label>
 						<br>
-						<input type="checkbox" name="program6" value="yes" checked disabled>
+						<input type="checkbox" name="program6" value="persiapanintensif" checked required>
 						<label for="program6">Kelas Persiapan Intensif</label>
 						<br>
-						<input type="checkbox" name="program7" value="yes">
+						<input type="checkbox" name="program7" value="khususliburan">
 						<label for="program7">Kelas Liburan</label>
 						<br>
-						<input type="checkbox" name="program8" value="yes">
+						<input type="checkbox" name="program8" value="khususramadhan">
 						<label for="program8">Kelas Ramadhan</label>
 						<br>
 						<br>
@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="form-group">
 					<label>Mata Pelajaran Yang Ingin Diajarkan</label>
 					<br>
-					<i>Maksimal 3 Mata Pelajaran</i>
+					<i>Minimal 1 Mata Pelajaran</i>
 					<br>
 					<br>
 					<label for="mapel1">Mata Pelajaran Pertama</label>

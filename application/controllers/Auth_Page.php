@@ -21,6 +21,8 @@ class Auth_Page extends CI_Controller {
 		$this->load->model('Model_Siswa');
 
 		$this->load->model('Model_Tentor');
+
+		
 	}
 
 	public function index()
@@ -45,6 +47,10 @@ class Auth_Page extends CI_Controller {
 
 	public function userRegistration()
 	{
+		if(!isset($_SESSION['logged_in'])){
+        	redirect(base_url().'signin','refresh');
+        }
+
 		$selector = $this->input->post('selector'); 
 		
 		$data = array(
@@ -60,10 +66,9 @@ class Auth_Page extends CI_Controller {
 			$result = $this->Model_Register->registerTentor($data);
 		}
 
-		if($result == TRUE){
-			$data['error'] = 'Anda berhasil mendaftar !';
+		if($result == 1){
+			$this->session->set_flashdata('error', 'Anda berhasil mendaftar !');
 			redirect(base_url().'signin','refresh');
-			//$this->load->view('v_signin', $data);
 		} 
 		else {
 			$data['error'] = 'Pendaftaran Gagal, Surel Telah Terpakai !';
@@ -75,8 +80,8 @@ class Auth_Page extends CI_Controller {
 	{
 		$selector = $this->input->post('selector');
 		$data = array(
-			'Email' => $this->input->post('Email'),
-			'Pass' => md5($this->input->post('Pass'))
+			'Email' => $this->input->post('email'),
+			'Pass' => md5($this->input->post('pass'))
 			);
 		
 		$result = TRUE;
@@ -86,64 +91,101 @@ class Auth_Page extends CI_Controller {
 		} else {
 			$result = $this->Model_Login->loginTentor($data);
 		}
-
-		if ($result == TRUE) {
-			
-			if($selector == 'siswa'){
-				$id = $this->Model_Login->getIDSiswa($data);
-
-				$result = $this->Model_Siswa->getData($id);
-
-				$data1 = $this->Model_Siswa->checkData1($id);
-
-				$data2 = $this->Model_Siswa->checkData2($id);
-
-				if ($result != FALSE) {
-					$session_data = array(
-						'fullName' => $result[0]->NamaLengkap,
-						'email' => $result[0]->Email,
-						);
-					
-					$this->session->set_userdata('logged_in', $session_data);
-					
-					if ($data1 == FALSE){
-						$data = array(
-							'username' => $result[0]->NamaLengkap,
-							'error' 	=> ''
-						);
-						$this->load->view('v_siswa', $data);
-
-					} 
-					else {
-						if($data2 == FALSE){
-							$data = array(
-								'error' 	=> ' ' , 
-								'username'	=> $result[0]->NamaLengkap,
-								'bill' 		=> $result[0]->JumlahPembayaran
-								);
-
-							$this->load->view('v_verify_siswa', $data);
-						}
-						else {
-							$this->load->view('v_home');
-						}
-					}
-
-				}
-			}
-			else {
-				$id = $this->Model_Login->getIDTentor($data);
-
-				$result = $this->Model_Tentor->getData($id);
-			}
-			
-			
+		if ($result == -1) {
+			$this->session->set_flashdata('error', 'Surel atau password salah!');
+			redirect(base_url().'signin','refresh');
 		} 
 		else {
-			$data = array(
-				'error' => 'Surel atau Password salah!');
-			
-			$this->load->view('v_login', $data);
+
+			//Berhasil Login
+			$id = $result;
+
+			if($selector == "siswa" ){
+				$result = $this->Model_Siswa->checkData1($id);
+
+				$newdata = array(
+					'ID' 		=> $id,
+			        'logged_in'  => TRUE
+				);
+
+				$this->session->set_userdata($newdata);
+				//memeriksa pengisian data diri
+				if ($result == 1) {
+					
+					$dataSiswa = $this->Model_Siswa->getData($id);
+
+					$result = $this->Model_Siswa->checkData2($id);
+					//memeriksa pembayaran
+					if ($result == 1) {
+						
+						$result = $this->Model_Siswa->checkData3($id);
+
+						//memeriksa status
+						if($result == "Belum Bayar"){
+							redirect(base_url().'waiting_for_confirmation','refresh');
+						}
+						else {
+							//Menampilkan UI SISWA
+							echo $result;
+						}
+						
+					}
+					else {
+						$newdata = array(
+						        'username'  => $dataSiswa->NamaLengkap,
+						        'bill'		=> $dataSiswa->JumlahPembayaran
+						);
+
+						$this->session->set_userdata($newdata);
+						redirect(base_url().'bill','refresh');
+					}
+				}
+				else {
+					redirect(base_url().'fill_student_data','refresh');
+				}
+			} else {
+				$result = $this->Model_Tentor->checkData1($id);
+				$newdata = array(
+					'ID' 		=> $id,
+			        'logged_in'  => TRUE
+				);
+
+				$this->session->set_userdata($newdata);
+				//memeriksa pengisian data diri
+				if ($result == 1) {
+					
+					$dataTentor = $this->Model_Tentor->getData($id);
+
+					$result = $this->Model_Tentor->checkData2($id);
+					
+					//memeriksa pembayaran
+					if ($result == 1) {
+						
+						$result = $this->Model_Tentor->checkData3($id);
+
+						//memeriksa status
+						if($result == "Belum Diterima"){
+							redirect(base_url().'waiting_for_confirmation','refresh');
+						}
+						else {
+							//Menampilkan UI Tentor
+							echo $result;
+						}
+						
+					}
+					else {
+						$newdata = array(
+						        'username'  => $dataTentor->NamaLengkap
+						);
+
+						$this->session->set_userdata($newdata);
+						redirect(base_url().'achievement','refresh');
+					}
+				}
+				else {
+					redirect(base_url().'fill_teacher_data','refresh');
+				}
+			}
 		}
 	}
 
