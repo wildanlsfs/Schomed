@@ -40,6 +40,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php  if($error = $this->session->flashdata('error')): ?>
 					<i style="color: #F00;"><?php  echo $error;?></i>
 				<?php  endif;?>
+				<?php  if($success = $this->session->flashdata('success')): ?>
+					<i><?php  echo $success;?></i>
+				<?php  endif;?>
 					<hr>
 				<div class="form-group">
 					<label for="email">Alamat Surat Elektronik</label>
@@ -49,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="form-group">
 					<label for="pass">Password</label>
 					<input type="password" class="form-control" name="pass" placeholder="Password" required pattern=".{8,}" title="Password Minimal 8 Karakter">
-					<div id="errorPass2"></div>
+					<div id="errorPass"></div>
 				</div>
 				<button type="submit" class="authpage-button">MASUK</button>
 			</form>

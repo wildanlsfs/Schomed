@@ -8,9 +8,24 @@ class Admin_Page extends CI_Controller {
 		$this->load->view('v_admin');
 	}
 
-	public function FunctionName()
+	public function login()
 	{
-		$this->load->view('View File', $data, FALSE);
+		$this->load->view('v_admin_auth');
+	}
+
+	public function auth()
+	{
+		# code...
+	}
+
+	public function CRUD($value='')
+	{
+		# code...
+	}
+
+	public function author()
+	{
+		$this->load->view('v_author');
 	}
 
 }

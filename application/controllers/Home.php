@@ -12,7 +12,10 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		session_destroy();
+		if(isset($_SESSION['logged_in'])){
+			unset($_SESSION['logged_in']);
+			unset($_SESSION['ID']);
+		}
 		$this->load->view('v_home');
 	}
 

@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- Panel -->
 
 	<div class="authpage">
-		<div class="authpage-inner well well-lg">
+		<div class="authpage-inner-large well well-lg">
 			<br>
 			<h1>SYARAT DAN KETENTUAN</h1>
 			<br>

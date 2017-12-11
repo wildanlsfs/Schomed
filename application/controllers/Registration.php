@@ -12,9 +12,9 @@ class Registration extends CI_Controller {
         $this->load->model('Model_Siswa');
         $this->load->model('Model_Tentor');
         $this->load->model('Model_Jadwal');
-        if(!isset($_SESSION['logged_in'])){
-        	redirect(base_url().'signin','refresh');
-        }
+        // if(!isset($_SESSION['logged_in'])){
+        // 	redirect(base_url().'signin','refresh');
+        // }
 	}
 
 	public function index()
@@ -71,6 +71,7 @@ class Registration extends CI_Controller {
 				'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
 				'Tingkatan' 	=> $this->input->post('tingkatan'),
 				'Mapel' 		=> $this->input->post('mapel1'),
+				'DurasiBelajar' => $this->input->post('durasibelajar'),
 				'Kuota' 		=> $this->input->post('kuota1'),
 				'Program' 		=> $this->input->post('program'),
 				'TipeKelas' 	=> $this->input->post('classtype')
@@ -366,7 +367,6 @@ class Registration extends CI_Controller {
 			$image_path = base_url("uploads/".$info['raw_name'].$info['file_ext']);
 			$data['BuktiPrestasi'] = $image_path;
 			if($this->Model_Tentor->fillData2($data)){
-				session_destroy();
 				redirect(base_url().'waiting_for_confirmation','refresh');
 			} else {
 				$this->session->set_flashdata('error', "Upload Gagal");

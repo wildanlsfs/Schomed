@@ -78,7 +78,6 @@ class Model_Register extends CI_Model {
 		$query = $this->db->get();
 		
 		if ($query->num_rows() == 0) {
-
 			$date1 = new DateTime();
 			$date2 = new DateTime('1 week');
 			

@@ -87,11 +87,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<label for="paket">Paket</label>
 					<select id="jumlah" class="form-control" name="banyaksiswa" form="form-fulldata" required title="Harap Pilih">
 						<option value="" disabled selected>-- Pilih --</option>
-					    <option value="seorang">1 Siswa</option>
-					    <option value="duaorang">2 Siswa</option>
-					    <option value="tigaorang">3 Siswa</option>
-					    <option value="empatorang">4 Siswa</option>
-					    <option value="limaorang">5 Siswa</option>
+					    <option value="Satu">1 Siswa</option>
+					    <option value="Dua">2 Siswa</option>
+					    <option value="Tiga">3 Siswa</option>
+					    <option value="Empat">4 Siswa</option>
+					    <option value="Lima">5 Siswa</option>
 					</select>
 					<br>
 					<select id="time" class="form-control" name="durasibelajar" form="form-fulldata" required title="Harap Pilih">
@@ -161,7 +161,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</select>
 					<br>
 					<label for="kuota1">Banyak Pertemuan Mata pelajaran ke 1</label>
-					<input class="form-control" type="number" id="kuota1" name="kuota1" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="0" max="">
+					<input class="form-control" type="number" id="kuota1" name="kuota1" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="0" max="">
 					<br>
 					<div id="ke2">
 						<label for="mapel2">Mata Pelajaran ke 2</label>
@@ -183,7 +183,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</select>
 						<br>
 						<label for="kuota2">Banyak Pertemuan Mata pelajaran ke 2</label>
-						<input class="form-control" type="number" id="kuota2" name="kuota2"  required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="3" max="">
+						<input class="form-control" type="number" id="kuota2" name="kuota2" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="3" max="">
 					</div>
 					<br>
 					<div id="ke3">
@@ -206,7 +206,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</select>
 						<br>
 						<label for="kuota3">Banyak Pertemuan Mata pelajaran ke 3</label>
-						<input class="form-control" type="number" id="kuota3" name="kuota3"  required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="0" max="">
+						<input class="form-control" type="number" id="kuota3" name="kuota3" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="0" max="">
 					</div>
 				</div>
 				<button type="submit" class="authpage-button">SELANJUTNYA</button>
@@ -236,11 +236,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				var val6 = $('#kuota1').val();
 				var val7 = $('#kuota2').val();
 				var val8 = $('#kuota3').val();
-				var max = val3;
-				var max1 = max - val6;
-				var max2 = max - val6 - val7;
+				var max  = val3;
 
-				if(val1 == "seorang"){
+				if(val1 == "Satu"){
 			    	if(val2 == "t60"){
 			    		var result = 100000 +  225000 * val3 / 3;
 			    		if(val3 == "3"){
@@ -275,7 +273,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    			$('#jumlahpembayaran').val("Rp. " + result + ",00");
 			    		}
 			    	}
-			    } else if(val1 == "duaorang"){
+			    } else if(val1 == "Dua"){
 			    	if(val2 == "t60"){
 			    		var result = 100000 +  2 * 180000 * val3 / 3;
 			    		if(val3 == "3"){
@@ -310,7 +308,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    			$('#jumlahpembayaran').val("Rp. " + result + ",00");
 			    		}
 			    	}
-			    } else if(val1 == "tigaorang"){
+			    } else if(val1 == "Tiga"){
 			    	if(val2 == "t60"){
 			    		var result = 100000 +  3 * 135000 * val3 / 3;
 			    		if(val3 == "3"){
@@ -345,7 +343,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    			$('#jumlahpembayaran').val("Rp. " + result + ",00");
 			    		}
 			    	}
-			    } else if(val1 == "empatorang"){
+			    } else if(val1 == "Empat"){
 			    	if(val2 == "t60"){
 			    		var result = 100000 +  4 * 75000 * val3 / 3;
 			    		if(val3 == "3"){
@@ -380,7 +378,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    			$('#jumlahpembayaran').val("Rp. " + result + ",00");
 			    		}
 			    	}
-			    } else if(val1 == "limaorang"){
+			    } else if(val1 == "Lima"){
 			    	if(val2 == "t60"){
 			    		var result = 100000 +  5 * 60000 * val3 / 3;
 			    		if(val3 == "3"){
@@ -419,12 +417,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    if(val4 == "1"){
 			    	$('#kuota1').attr("max", max);
 			    } else if(val4 == "2"){
-			    	$('#kuota1').attr("max", max);
-			    	$('#kuota2').attr("max", max1);
+			    	$('#kuota1').attr("max", max - val7);
+			    	$('#kuota2').attr("max", max - val6);
 			    } else if(val4 == "3"){
-			    	$('#kuota1').attr("max", max);
-			    	$('#kuota2').attr("max", max1);
-			    	$('#kuota3').attr("max", max2);
+			    	$('#kuota1').attr("max", max - val7 - val8);
+			    	$('#kuota2').attr("max", max - val6 - val8);
+			    	$('#kuota3').attr("max", max - val6 - val7);
 			    }
 			});
 		});

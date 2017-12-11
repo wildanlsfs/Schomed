@@ -47,10 +47,6 @@ class Auth_Page extends CI_Controller {
 
 	public function userRegistration()
 	{
-		if(!isset($_SESSION['logged_in'])){
-        	redirect(base_url().'signin','refresh');
-        }
-
 		$selector = $this->input->post('selector'); 
 		
 		$data = array(
@@ -67,7 +63,7 @@ class Auth_Page extends CI_Controller {
 		}
 
 		if($result == 1){
-			$this->session->set_flashdata('error', 'Anda berhasil mendaftar !');
+			$this->session->set_flashdata('success', 'Anda berhasil mendaftar !');
 			redirect(base_url().'signin','refresh');
 		} 
 		else {
