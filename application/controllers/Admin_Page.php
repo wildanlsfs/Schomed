@@ -112,15 +112,64 @@ class Admin_Page extends CI_Controller {
 		redirect('admin', 'refresh');
 	}
 
+	public function addHistory()
+	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'jpg|png|JPG|PNG';
+		$config['max_size']  = '0';
+		$config['max_width']  = '0';
+		$config['max_height']  = '0';
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload()){
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+			redirect('teacher','refresh');
+		}
+		else{
+			$info = $this->upload->data();
+			$image_path = base_url("uploads/".$info['raw_name'].$info['file_ext']);
+
+			$ID = $_SESSION['ID'];
+
+			$query = $this->db->query("SELECT IDSiswa FROM jadwal WHERE IDTentor = $ID");
+			$query = $query->row();
+			$IDSiswa = $query->IDSiswa;
+
+			$data = array(
+				"IDSiswa"		=> $IDSiswa,
+				"IDTentor"		=> $ID,
+				"Mapel"			=> $this->input->post("mapel"),
+				"Materi"		=> $this->input->post("materi"),
+				"Ringkasan"		=> $this->input->post("ringkasan"),
+				"Dokumentasi"	=> $image_path
+			);
+
+			$this->db->insert('history', $data);
+
+			redirect('teacher', 'refresh');
+			
+		}
+
+	}
+
 	public function teacher()
 	{
 		if(!isset($_SESSION['logged_in'])){
 			redirect('','refresh');
 		}
 		$id = $_SESSION['ID'];
+
+
+		$query = $this->db->query("SELECT Status FROM tentor WHERE ID = $id");
+		$query = $query->row();
+
+		$query2 = $this->db->query("SELECT a.NamaLengkap, a.NoTelp, a.IDLine, a.Tingkatan, a.BanyakSiswa, a.DurasiBelajar, a.BanyakPertemuan, a.ProgramBelajar, a.TipeKelas, b.Mapel FROM  siswa a, jadwal b WHERE a.id = (SELECT IDSiswa FROM jadwal WHERE IDTentor = $id)");
+		$query2 = $query2->row();
 		$data = array(
 			'dataHistory' 	=> $this->Model_Admin->listHistoryTeacher(),
-			'dataStatus'	=> $this->db->query("SELECT Status FROM tentor WHERE ID = $id")
+			'dataStatus'	=> $query->Status,
+			'dataInfo'		=> $query2
 		);
 		
 		$this->load->view('v_tentor', $data);

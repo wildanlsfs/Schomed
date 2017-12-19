@@ -79,7 +79,7 @@
 					  					<div><button id="addHistory" class="btn btn-xs btn-info">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
-					  						<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>addAuthor">
+					  						<?php echo form_open_multipart('addHistory','id="form-fulldata"');?>
 												<div class="form-group">
 													<label for="mapel">Mata Pelajaran</label>
 													<select class="form-control" id="mapel" name="mapel" form="form-fulldata" required title="Harap Pilih">
@@ -103,6 +103,10 @@
 													<textarea class="form-control" name="ringkasan" style="resize: none;" required placeholder="Ringkasan Materi"></textarea>
 												</div>
 												<div class="form-group">
+													<div><?php if(isset($_SESSION['error'])){
+														echo $_SESSION['error'];
+
+													}?></div>
 													<label for="userfile" >Pilih Foto Dokumentasi</label><br>
 													<input type="file" name="userfile" id="userfile" class="inputfile" size="20" required />
 												</div>
@@ -111,19 +115,72 @@
 					  						<br>
 					  					</div>
 					  					<hr>
-					  					<?php endif;?>
-					  					<?php if($dataStatus != "Teaching"):?>
-					  						<div style="color: red;">Anda Tidak Memiliki Murid Saat Ini!</div>
-					  						<hr>
-					  					<?php endif;?>
+					  					<div>
+					  						<?php 
+					  						echo '<h4>Data Siswa</h4><br>';
+					  						echo '
+						  						<table cellpadding="0" cellspacing="0" class ="table table-bordered" border="0" >
+						  							<thead>
+						  								<tr>
+						  									<th>
+						  										Nama Lengkap
+						  									</th>
+						  									<th>
+						  										Nomer Telepon
+						  									</th>
+						  									<th>
+						  										ID Line
+						  									</th>
+						  									<th>
+						  										Tingkatan
+						  									</th>
+						  									<th>
+						  										BanyakSiswa
+						  									</th>
+						  									<th>
+						  										Durasi Belajar
+						  									</th>
+						  									<th>
+						  										Banyak Pertemuan
+						  									</th>
+						  									<th>
+						  										Program Belajar
+						  									</th>
+						  									<th>
+						  										TipeKelas
+						  									</th>
+						  									<th>
+						  										Mata Pelajaran
+						  									</th>
+						  								</tr>
+						  							</thead>
+						  							<tbody>
+						  								<tr>
+						  									<td>'.$dataInfo->NamaLengkap.'</td>
+						  									<td>'.$dataInfo->NoTelp.'</td>
+						  									<td>'.$dataInfo->IDLine.'</td>
+						  									<td>'.$dataInfo->Tingkatan.'</td>
+						  									<td>'.$dataInfo->BanyakSiswa.'</td>
+						  									<td>'.$dataInfo->DurasiBelajar.'</td>
+						  									<td>'.$dataInfo->BanyakPertemuan.'</td>
+						  									<td>'.$dataInfo->ProgramBelajar.'</td>
+						  									<td>'.$dataInfo->TipeKelas.'</td>
+						  									<td>'.$dataInfo->Mapel.'</td>
+						  								</tr>
+						  							</tbody>
+						  						</table>
+
+					  						';
+					  						?>
+					  					</div>
+					  					<hr>
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherRequest">
 											<thead>
 												<tr>
-													<th>ID</th>
 													<th>Mata Pelajaran</th>
 													<th>Materi</th>
 													<th>Ringkasan</th>
-													<th>Foto</th>
+													<th width="50px">Foto</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -137,6 +194,11 @@
 												?>
 											</tbody>
 										</table>
+					  					<?php endif;?>
+					  					<?php if($dataStatus != "Teaching"):?>
+					  						<div style="color: red;">Anda Tidak Memiliki Murid Saat Ini!</div>
+					  						<hr>
+					  					<?php endif;?>
 					  				</div>
 					  			</div>
 							</div>

@@ -63,7 +63,7 @@ class Model_Admin extends CI_Model {
 	public function listHistoryTeacher()
 	{
 		$id = $_SESSION['ID']; 
-		$query = $this->db->query("SELECT Mapel, Materi, Ringkasan, Dokumentasi FROM history WHERE IDTentor = $id");
+		$query = $this->db->query("SELECT Mapel, Materi, Ringkasan, Dokumentasi FROM history WHERE IDTentor = $id AND IDSiswa = (SELECT IDSiswa FROM history WHERE IDTentor = $id LIMIT 1)");
 		return $query->result();
 	}
 

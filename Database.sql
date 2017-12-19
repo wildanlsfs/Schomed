@@ -26,13 +26,14 @@ CREATE TABLE `admin` (
   `Pass` char(32) DEFAULT NULL,
   `Authority` int(11) DEFAULT '2',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `admin` */
 
 insert  into `admin`(`ID`,`Username`,`Pass`,`Authority`) values 
-(1,'Wildan','b9334bbe3ea1c8852a22af599f6e6df7',1),
-(2,'Hery','25d55ad283aa400af464c76d713c07ad',1);
+(1,'Awal','25d55ad283aa400af464c76d713c07ad',1),
+(2,'Hery','25d55ad283aa400af464c76d713c07ad',1),
+(3,'Wildan','7958bf69494d121e1cfa11eb6fb7586b',1);
 
 /*Table structure for table `article` */
 
@@ -98,12 +99,9 @@ CREATE TABLE `komentar` (
   `Komentar` text,
   `Tanggal` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `komentar` */
-
-insert  into `komentar`(`ID`,`NamaLengkap`,`Email`,`Komentar`,`Tanggal`) values 
-(1,'Wildan  Syawal','Wildanlsfs@gmail.com','Mantap, Tentor jago semua','2017-12-18 06:25:59');
 
 /*Table structure for table `mapel` */
 

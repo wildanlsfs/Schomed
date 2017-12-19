@@ -82,7 +82,7 @@
 													<th>Mata Pelajaran</th>
 													<th>Materi</th>
 													<th>Ringkasan</th>
-													<th width="300px">Foto</th>
+													<th width="50px">Foto</th>
 												</tr>
 											</thead>
 											<tbody>

@@ -74,6 +74,7 @@ $route['addArticle'] = 'Admin_Page/addArticle';
 $route['addAuthor'] = 'Admin_Page/addAuthor';
 $route['addTeacher'] = 'Admin_Page/addTeacher';
 $route['addStudent'] = 'Admin_Page/addStudent';
+$route['addHistory'] = 'Admin_Page/addHistory';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
