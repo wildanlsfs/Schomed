@@ -23,6 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
+	<!--  -->
+	<div id="errortext"></div>
+	<!--  -->
+
 	<!-- Panel -->
 
 	<div class="authpage">
@@ -481,6 +485,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	                        html += '<option value='+data[i].ID+'>'+data[i].NamaLengkap+'</option>';
 	                    }
 	                    $('#tentor1').html(html);
+	                }, 
+	                error: function(tr){
+	                	$('#errortext').html(tr.responseText);
 	                }
 	            });
 	        });

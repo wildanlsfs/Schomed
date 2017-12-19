@@ -75,6 +75,7 @@
 										
 									</div>
 					  				<div class="panel-body">
+					  					<?php if($dataStatus == "Teaching"):?>
 					  					<div><button id="addHistory" class="btn btn-xs btn-info">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
@@ -110,6 +111,11 @@
 					  						<br>
 					  					</div>
 					  					<hr>
+					  					<?php endif;?>
+					  					<?php if($dataStatus != "Teaching"):?>
+					  						<div style="color: red;">Anda Tidak Memiliki Murid Saat Ini!</div>
+					  						<hr>
+					  					<?php endif;?>
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherRequest">
 											<thead>
 												<tr>

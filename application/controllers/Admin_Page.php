@@ -117,9 +117,10 @@ class Admin_Page extends CI_Controller {
 		if(!isset($_SESSION['logged_in'])){
 			redirect('','refresh');
 		}
-
+		$id = $_SESSION['ID'];
 		$data = array(
-			'dataHistory' => $this->Model_Admin->listHistoryTeacher()
+			'dataHistory' 	=> $this->Model_Admin->listHistoryTeacher(),
+			'dataStatus'	=> $this->db->query("SELECT Status FROM tentor WHERE ID = $id")
 		);
 		
 		$this->load->view('v_tentor', $data);
@@ -135,6 +136,51 @@ class Admin_Page extends CI_Controller {
 			'dataHistory' => $this->Model_Admin->listHistoryStudent()
 		);
 		$this->load->view('v_siswa', $data);
+	}
+
+	public function changeSalary()
+	{
+		$ID = $this->input->post('ID');
+		$gaji = $this->input->post('Gaji');
+		$query = $this->db->query("UPDATE tentor SET Gaji = $gaji WHERE ID = $ID");
+	}
+
+	public function deleteAuthor()
+	{
+		$data = $this->input->post('ID');
+		$query = $this->db->query("DELETE FROM admin WHERE ID = $data");
+	}
+
+	public function acceptTeacher()
+	{
+		$data = $this->input->post('ID');
+		$query = $this->db->query("UPDATE  tentor SET Status = 'Available' WHERE ID = $data");
+	}
+
+	public function acceptStudent()
+	{
+		$data = $this->input->post('ID');
+		$query = $this->db->query("UPDATE  siswa SET status = 'Learning' WHERE ID = $data");
+		$query = $this->db->query("UPDATE  jadwal SET status = 'Learning' WHERE IDSiswa = $data");
+		$query = $this->db->query("UPDATE  waiting_list SET status = 1 WHERE IDSiswa = $data");
+		$query = $this->db->query("UPDATE tentor SET STATUS = 'Teaching' WHERE ID = (SELECT IDTentor FROM jadwal WHERE IDSiswa = $data LIMIT 1)");
+	}
+
+	public function declineTeacher()
+	{
+		$data = $this->input->post('ID');
+		$query = $this->db->query("DELETE FROM tentor WHERE ID = $data");
+		$query = $this->db->query("DELETE FROM mapel WHERE IDTentor = $data");
+		$query = $this->db->query("DELETE FROM program WHERE IDTentor = $data");
+	}
+
+	public function declineStudent()
+	{
+		$data = $this->input->post('ID');
+		$query = $this->db->query("DELETE FROM siswa  WHERE ID = $data");
+		$query = $this->db->query("UPDATE tentor SET STATUS = 'Available' WHERE ID = (SELECT IDTentor FROM jadwal WHERE IDSiswa = $data LIMIT 1)");
+		$query = $this->db->query("DELETE FROM jadwal  WHERE IDSiswa = $data");
+		$query = $this->db->query("DELETE FROM waiting_list  WHERE IDSiswa = $data");
 	}
 
 	public function coba()

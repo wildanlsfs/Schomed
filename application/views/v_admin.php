@@ -55,7 +55,9 @@
 			</div>
 		</div>
 	</div>
-
+	<!--  -->
+	<div id="testError"></div>
+	<!--  -->
 	<div class="page-content">
 		<div class="row">
 			<div class="col-md-2">
@@ -86,7 +88,7 @@
 													<th width="30px">ID</th>
 													<th>Full Name</th>
 													<th>Deadline</th>
-													<th width="300px">Image</th>
+													<th width="150px">Image</th>
 													<th width="75px">Action</th>
 												</tr>
 											</thead>
@@ -95,18 +97,16 @@
 													foreach($reqTentor->result() as $row){
 														echo '
 															<tr class="gradeX">
-																<form method="post" action="#">
-																	<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
-																	<td>'.$row->NamaLengkap.'</td>
-																	<td>'.$row->MaksimalKonfirmasi.'</td>
-																	<td class="center">
-																		<img class="img-responsive" src="'.$row->BuktiPrestasi.'" class="img">
-																	</td>
-																	<td class="center">
-																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-success">Accept</button>
-																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Decline</button>
-																	</td>
-																</form>
+																<td>'.$row->ID.'</td>
+																<td>'.$row->NamaLengkap.'</td>
+																<td>'.$row->MaksimalKonfirmasi.'</td>
+																<td class="center">
+																	<img class="img-responsive" src="'.$row->BuktiPrestasi.'" class="img">
+																</td>
+																<td class="center">
+																	<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-accept-teacher" value="'.$row->ID.'">Accept</button>
+																	<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-teacher" value="'.$row->ID.'">Decline</button>
+																</td>
 															</tr>
 														';
 													}
@@ -129,8 +129,9 @@
 												<tr>
 													<th width="30px">ID</th>
 													<th>Full Name</th>
+													<th>Total Pembayaran</th>
 													<th>Deadline</th>
-													<th width="300px">Image</th>
+													<th width="150px">Image</th>
 													<th width="75px">Action</th>
 												</tr>
 											</thead>
@@ -139,18 +140,17 @@
 													foreach($reqSiswa->result() as $row){
 														echo '
 															<tr class="gradeX">
-																<form method="post" action="#">
-																	<td>'.$row->IDSiswa.'<input type="hidden" name="ID" value="'.$row->IDSiswa.'"></td>
-																	<td>'.$row->NamaSiswa.'</td>
-																	<td>'.$row->MaksimalPembayaran.'</td>
-																	<td class="center">
-																		<img class="img-responsive" src="'.$row->BuktiPembayaran.'" class="img">
-																	</td>
-																	<td class="center">
-																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-success">Accept</button>
-																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Decline</button>
-																	</td>
-																</form>
+																<td>'.$row->IDSiswa.'</td>
+																<td>'.$row->NamaSiswa.'</td>
+																<td>'.$row->JumlahPembayaran.'</td>
+																<td>'.$row->MaksimalPembayaran.'</td>
+																<td class="center">
+																	<img class="img-responsive" src="'.$row->BuktiPembayaran.'" class="img">
+																</td>
+																<td class="center">
+																	<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-accept-student" value="'.$row->IDSiswa.'">Accept</button>
+																	<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-student" value="'.$row->IDSiswa.'">Decline</button>
+																</td>
 															</tr>
 														';
 													}
@@ -189,7 +189,10 @@
 																<td>'.$row->ID.'</td>
 																<td>'.$row->NamaLengkap.'</td>
 																<td>10/10</td>
-																<td class="center">Rp. '.$row->Gaji.'</td>
+																<td>
+																	Rp. <input type="number" name="gaji" value="'.$row->Gaji.'" min="0" max="200000" class="gaji-input-field">  
+																	<button class="btn btn-success btn-xs btn-confirm" value="'.$row->ID.'">Confirm</button>
+																</td>
 															</tr>
 														';
 													}
@@ -208,10 +211,11 @@
 							<div class="col-md-10">
 								<div class="content-box-large">
 					  				<div class="panel-heading">
-										<div class="panel-title">CRUD Teacher</div>
+										<!-- <div class="panel-title">CRUD Teacher</div> -->
+										<div class="panel-title">Teacher List</div>
 									</div>
 					  				<div class="panel-body">
-					  					<div><button id="addTeacher" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
+					  					<!-- <div><button id="addTeacher" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
 					  						<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>addTeacher">
@@ -345,7 +349,7 @@
 					  						<div class="panel-title">Teacher List</div>
 					  						<br>
 					  					</div>
-					  					<br>
+					  					<br> -->
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherCRUD">
 											<thead>
 												<tr>
@@ -355,27 +359,34 @@
 													<th>Phone Number</th>
 													<th>University</th>
 													<th>Status</th>
-													<th width="75px">Action</th>
+													<!-- <th width="75px">Action</th> -->
 												</tr>
 											</thead>
 											<tbody>
 												<?php foreach($dataTeacher->result() as $row){
 													echo '
 														<tr class="gradeX">
-															<form>
-																<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
-																<td>'.$row->NamaLengkap.'</td>
-																<td>'.$row->JenisKelamin.'</td>
-																<td>'.$row->NoTelp.'</td>
-																<td>'.$row->AsalUniv.'</td>
-																<td>'.$row->Status.'</td>
-																<td>
-																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-teacher">Edit</button>
-																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete">Delete</button>
-																</td>
-															</form>
+															<td>'.$row->ID.'</td>
+															<td>'.$row->NamaLengkap.'</td>
+															<td>'.$row->JenisKelamin.'</td>
+															<td>'.$row->NoTelp.'</td>
+															<td>'.$row->AsalUniv.'</td>
+															<td>'.$row->Status.'</td>
 														</tr>
 													';
+													// echo '
+													// 	<tr class="gradeX">
+													// 		<td>'.$row->ID.'</td>
+													// 		<td>'.$row->NamaLengkap.'</td>
+													// 		<td>'.$row->JenisKelamin.'</td>
+													// 		<td>'.$row->NoTelp.'</td>
+													// 		<td>'.$row->AsalUniv.'</td>
+													// 		<td>'.$row->Status.'</td>
+													// 		<td>
+													// 			<button style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-teacher" value=""><a href="'.base_url("editTeacher/").$row->ID.'">Edit</a></button>
+													// 		</td>
+													// 	</tr>
+													// ';
 												}?>
 											</tbody>
 										</table>
@@ -391,10 +402,11 @@
 							<div class="col-md-10">
 								<div class="content-box-large">
 					  				<div class="panel-heading">
-										<div class="panel-title">CRUD Student</div>
+					  					<div class="panel-title">Student List</div>
+										<!-- <div class="panel-title">CRUD Student</div> -->
 									</div>
 					  				<div class="panel-body">
-					  					<div><button id="addStudent" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
+					  					<!-- <div><button id="addStudent" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
 					  						<form class="authpage-form" id="form-fulldata2" method="post" action="<?php echo base_url()?>addStudent">
@@ -587,7 +599,7 @@
 					  						<div class="panel-title">Student List</div>
 					  						<br>
 					  					</div>
-					  					<br>
+					  					<br> -->
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="studentCRUD">
 											<thead>
 												<tr>
@@ -596,26 +608,33 @@
 													<th>Phone Number</th>
 													<th>Gender</th>
 													<th>Status</th>
-													<th width="75px">Action</th>
+													<!-- <th width="75px">Action</th> -->
 												</tr>
 											</thead>
 											<tbody>
+
 												<?php foreach($dataStudent->result() as $row){
 													echo '
 														<tr class="gradeX">
-															<form>
-																<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
-																<td>'.$row->NamaLengkap.'</td>
-																<td>'.$row->NoTelp.'</td>
-																<td>'.$row->JenisKelamin.'</td>
-																<td>'.$row->Status.'</td>
-																<td>
-																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-student">Edit</button>
-																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete">Delete</button>
-																</td>
-															</form>
+															<td>'.$row->ID.'</td>
+															<td>'.$row->NamaLengkap.'</td>
+															<td>'.$row->NoTelp.'</td>
+															<td>'.$row->JenisKelamin.'</td>
+															<td>'.$row->Status.'</td>
 														</tr>
 													';
+													// echo '
+													// 	<tr class="gradeX">
+													// 		<td>'.$row->ID.'</td>
+													// 		<td>'.$row->NamaLengkap.'</td>
+													// 		<td>'.$row->NoTelp.'</td>
+													// 		<td>'.$row->JenisKelamin.'</td>
+													// 		<td>'.$row->Status.'</td>
+													// 		<td>
+													// 			<button style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-student" value=""><a href="'.base_url("editStudent/").$row->ID.'">Edit</a></button>
+													// 		</td>
+													// 	</tr>
+													// ';
 												}?>
 											</tbody>
 										</table>
@@ -631,7 +650,7 @@
 							<div class="col-md-10">
 								<div class="content-box-large">
 					  				<div class="panel-heading">
-										<div class="panel-title">CRUD Author</div>
+										<div class="panel-title">Add or Delete Author</div>
 									</div>
 					  				<div class="panel-body">
 					  					<div><button id="addAuthor" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
@@ -669,14 +688,11 @@
 												<?php foreach($dataAuthor->result() as $row){
 													echo '
 														<tr class="gradeX">
-															<form>
-																<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
-																<td>'.$row->Username.'</td>
-																<td>
-																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-author">Edit</button>
-																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete">Delete</button>
-																</td>
-															</form>
+															<td>'.$row->ID.'</td>
+															<td>'.$row->Username.'</td>
+															<td>
+																<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete-author" value="'.$row->ID.'">Delete</button>
+															</td>
 														</tr>
 													';
 												}?>
@@ -1106,6 +1122,122 @@
 	            });
 	        });
 	    });
+	</script>
+	<script>
+		$(document).ready(function(){
+			$('.btn-delete-author').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>admin_page/deleteAuthor",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							thisOne.closest('tr').fadeOut(800, function(){ 
+								$(this).remove();
+							});
+						}
+
+					});
+				}
+			});
+			$('.btn-confirm').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					var gaji = $(this).prev().val();
+					$.ajax({
+						url: "<?php echo base_url();?>admin_page/changeSalary",
+						method: "POST",
+						data: {ID: id, Gaji: gaji },
+						success: function(response){
+							thisOne.closest('input').val(gaji);
+						}
+					});
+				}
+			});
+			$('.btn-accept-teacher').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>admin_page/acceptTeacher",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							thisOne.closest('tr').fadeOut(800, function(){ 
+								$(this).remove();
+							});
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-decline-teacher').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>admin_page/declineTeacher",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							thisOne.closest('tr').fadeOut(800, function(){ 
+								$(this).remove();
+							});
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-accept-student').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>admin_page/acceptStudent",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							thisOne.closest('tr').fadeOut(800, function(){ 
+								$(this).remove();
+							});
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-decline-student').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>admin_page/declineStudent",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							thisOne.closest('tr').fadeOut(800, function(){ 
+								$(this).remove();
+							});
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+		});
 	</script>
 </body>
 </html>

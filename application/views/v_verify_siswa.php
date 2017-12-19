@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			<br>
 			<?php if(isset($bill)){
-					echo "<p>Total Tagihan RP. ";
+					echo "<p>Total Tagihan ";
 					echo $bill;
 					echo "</p>";
 				}

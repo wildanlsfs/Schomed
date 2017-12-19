@@ -23,15 +23,16 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(32) DEFAULT NULL,
-  `Email` varchar(32) DEFAULT NULL,
   `Pass` char(32) DEFAULT NULL,
+  `Authority` int(11) DEFAULT '2',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `admin` */
 
-insert  into `admin`(`ID`,`Username`,`Email`,`Pass`) values 
-(1,'Semut Liar','wildanlsfs@gmail.com','b9334bbe3ea1c8852a22af599f6e6df7');
+insert  into `admin`(`ID`,`Username`,`Pass`,`Authority`) values 
+(1,'Wildan','b9334bbe3ea1c8852a22af599f6e6df7',1),
+(2,'Hery','25d55ad283aa400af464c76d713c07ad',1);
 
 /*Table structure for table `article` */
 
@@ -40,14 +41,30 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(128) DEFAULT NULL,
-  `Documentation` varchar(1024) DEFAULT NULL,
-  `Content` varchar(8192) DEFAULT NULL,
+  `Content` text,
   `Author` varchar(64) DEFAULT NULL,
   `CreatedTime` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `article` */
+
+/*Table structure for table `history` */
+
+DROP TABLE IF EXISTS `history`;
+
+CREATE TABLE `history` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IDSiswa` int(11) DEFAULT NULL,
+  `IDTentor` int(11) DEFAULT NULL,
+  `Mapel` varchar(64) DEFAULT NULL,
+  `Materi` text,
+  `Ringkasan` text,
+  `Dokumentasi` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `history` */
 
 /*Table structure for table `jadwal` */
 
@@ -60,6 +77,7 @@ CREATE TABLE `jadwal` (
   `BanyakSiswa` varchar(64) DEFAULT NULL,
   `Tingkatan` varchar(64) DEFAULT NULL,
   `Mapel` varchar(64) DEFAULT NULL,
+  `DurasiBelajar` varchar(64) DEFAULT NULL,
   `Kuota` int(11) DEFAULT NULL,
   `Program` varchar(32) DEFAULT NULL,
   `TipeKelas` varchar(64) DEFAULT NULL,
@@ -68,6 +86,24 @@ CREATE TABLE `jadwal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `jadwal` */
+
+/*Table structure for table `komentar` */
+
+DROP TABLE IF EXISTS `komentar`;
+
+CREATE TABLE `komentar` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NamaLengkap` varchar(64) DEFAULT NULL,
+  `Email` varchar(64) DEFAULT NULL,
+  `Komentar` text,
+  `Tanggal` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `komentar` */
+
+insert  into `komentar`(`ID`,`NamaLengkap`,`Email`,`Komentar`,`Tanggal`) values 
+(1,'Wildan  Syawal','Wildanlsfs@gmail.com','Mantap, Tentor jago semua','2017-12-18 06:25:59');
 
 /*Table structure for table `mapel` */
 

@@ -23,26 +23,16 @@ class Model_Admin extends CI_Model {
 	public function listRequest()
 	{
 		$data = array(
-		'reqSiswa' 		=> $this->db->query("SELECT IDSiswa,NamaSiswa,MaksimalPembayaran,BuktiPembayaran FROM waiting_list WHERE Status=0"),
-		'reqTentor' 	=> $this->db->query("SELECT ID,NamaLengkap,MaksimalKonfirmasi,BuktiPrestasi FROM tentor WHERE Status='Waiting'")
+		'reqSiswa' 		=> $this->db->query("SELECT a.IDSiswa, a.NamaSiswa, b.JumlahPembayaran, a.MaksimalPembayaran, a.BuktiPembayaran FROM waiting_list a, siswa b WHERE a.Status=0 AND b.status= 'belum bayar'"),
+		'reqTentor' 	=> $this->db->query("SELECT ID,NamaLengkap,MaksimalKonfirmasi,BuktiPrestasi FROM tentor WHERE Status='Belum Diterima'")
 		);
 
 		return $data;
 	}
 
-	public function acceptRequest()
-	{
-		
-	}
-
-	public function declineRequest()
-	{
-		
-	}
-
 	public function listSalary()
 	{
-		$query = $this->db->query("SELECT ID, NamaLengkap, Gaji FROM tentor");
+		$query = $this->db->query("SELECT ID, NamaLengkap, Gaji FROM tentor WHERE status != 'Belum Diterima'");
 		return $query;
 	}
 

@@ -119,6 +119,8 @@ class Model_Siswa extends CI_Model{
 
 	public function addCourse($data)
 	{
+		$idtentor = $data['IDTentor'];		
+		$this->db->query("UPDATE tentor SET Status = 'Waiting' WHERE ID = $idtentor");
 		return $this->db->insert('jadwal',$data);
 	}
 

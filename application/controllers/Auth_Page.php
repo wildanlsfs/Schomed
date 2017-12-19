@@ -95,6 +95,7 @@ class Auth_Page extends CI_Controller {
 
 			//Berhasil Login
 			$id = $result;
+			$username = substr($data['Email'], 0, strpos($data['Email'], '@'));
 
 			if($selector == "siswa" ){
 				$result = $this->Model_Siswa->checkData1($id);
@@ -102,7 +103,7 @@ class Auth_Page extends CI_Controller {
 				$newdata = array(
 					'ID' 			=> $id,
 			        'logged_in'  	=> TRUE,
-			        'username' 		=> $data['Email']
+			        'username' 		=> $username
 				);
 
 				$this->session->set_userdata($newdata);
@@ -144,7 +145,7 @@ class Auth_Page extends CI_Controller {
 				$newdata = array(
 					'ID' 		=> $id,
 			        'logged_in'  => TRUE,
-			        'username' 		=> $data['Email']
+			        'username' 		=> $username
 				);
 
 				$this->session->set_userdata($newdata);
