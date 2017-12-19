@@ -15,6 +15,7 @@ class Home extends CI_Controller {
 		if(isset($_SESSION['logged_in'])){
 			unset($_SESSION['logged_in']);
 			unset($_SESSION['ID']);
+			unset($_SESSION['username']);
 		}
 		$this->load->view('v_home');
 	}
@@ -36,7 +37,20 @@ class Home extends CI_Controller {
 		}
 	}
 
-	public function contact_Us(){
-		//
+	public function contact_us(){
+		$date = new DateTime();
+		$date = $date->format('Y-m-d H:i:s');
+
+		$data = array(
+			"NamaLengkap"	=> $this->input->post("firstName")." ".$this->input->post("lastName"),
+			"Email"			=> $this->input->post("email"),
+			"Komentar"		=> $this->input->post("comment"),
+			"Tanggal"		=> $date
+		);
+
+		$this->db->insert('komentar', $data);
+
+		redirect('Home', 'refresh');
+
 	}
 }

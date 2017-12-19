@@ -67,7 +67,7 @@
         			<input type="text" name="title" class="form-control">
             	</div>
         		<div class="form-group">
-        			<textarea id="ckeditor_full"></textarea>
+        			<textarea name="content" id="ckeditor_full"></textarea>
         		</div>
         		<button type="submit" class="btn btn-primary" >Add</button>
             </form>
@@ -81,9 +81,9 @@
      <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/admin/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link> 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <!-- jQuery UI -->
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="<?php echo base_url();?>assets/js/jquery-ui.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 

@@ -69,11 +69,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ​							Berkomitmen Menjadi Lembaga Les Privat Terbesar di Indonesia Timur</p>  <br>
                     </div>
 
-                    <div class="col-md-4 col-md-offset-1">
+                    <div class="col-md-6 ">
                     	<h3><a href="signin">MASUK</a></h3>
                     </div>
-                    <div class="col-md-4 col-md-offset-2">
+                    <div class="col-md-6 ">
                     	<h3><a href="signup">DAFTAR</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-md-12 ">
+                    	<h3><a href="article">BACA ARTIKEL</a></h3>
                     </div>
                 </div>
             </div>
@@ -87,7 +92,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
             	<br><br><br>
-            	
             	<iframe width="1024" height="606" src="https://www.youtube.com/embed/9gryBeoqrRg" frameborder="0" allowfullscreen style=" width: 100%; "></iframe>
 
             	<br><br><br>
@@ -270,21 +274,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<img class="galery-big-item" src="<?php echo base_url("/assets/img/schomed-pose-4.png")?>" alt="Mascot">
 				</div>
 				<br>
-				<form class="col-lg-6">
+				<form class="col-lg-6" method="post" action="<?php echo base_url();?>contact_us">
 					<div class="form-group">
 						<label for="name">Nama</label>
-						<input type="text" class="form-control" id="firstName" required placeholder="Nama Depan" >
+						<input type="text" class="form-control" name="firstName" required placeholder="Nama Depan" >
 						<br>
-						<input type="text" class="form-control" id="lastName" required placeholder="Nama Belakang" >
+						<input type="text" class="form-control" name="lastName" required placeholder="Nama Belakang" >
 					</div>
 					<div class="form-group">
 						<label for="email">Alamat Surat Elektronik</label>
-						<input type="email" class="form-control" id="email" required placeholder="Alamat Surat Elektronik" >
+						<input type="email" class="form-control" name="email" required placeholder="Alamat Surat Elektronik" >
 					</div>
 					
 					<div class="form-group" style="width: 100%;">
 						<label for="comment">Komentar</label>
-						<textarea name="comment" id="comment" style="width: 100%;" placeholder="Komentar di sini!"></textarea>
+						<textarea class="form-control" name="comment" id="comment" style="resize: none;" placeholder="Komentar di sini!"></textarea>
 					</div>
 					<button type="submit" class="btn btn-default">Serahkan</button>
 				</form>

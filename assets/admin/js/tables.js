@@ -5,4 +5,5 @@ $(document).ready(function() {
         $('#teacherCRUD').dataTable();
         $('#studentCRUD').dataTable();
         $('#authorCRUD').dataTable();
+        $('#commentTable').dataTable();
 } );

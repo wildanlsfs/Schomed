@@ -62,6 +62,7 @@
 						<li class="teacher bar "><a href="#"><i class="glyphicon glyphicon-pencil"></i>Teacher</a></li>
 						<li class="student bar "><a href="#"><i class="glyphicon glyphicon-pencil"></i>Student</a></li>
 						<li class="author bar "><a href="#"><i class="glyphicon glyphicon-pencil"></i>Author</a></li>
+						<li class="comment bar "><a href="#"><i class="glyphicon glyphicon-comment"></i>Comments</a></li>
 					</ul>
 				</div>
 			</div>
@@ -81,23 +82,31 @@
 													<th>ID</th>
 													<th>Full Name</th>
 													<th>Deadline</th>
-													<th>Imgage</th>
+													<th width="300px">Image</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Nama -->Wildan</td>
-														<td><!-- Tanggal Maksimal -->12 juni 2018</td>
-														<td class="center"><!-- Image --><img src="" class="img"></td>
-														<td class="center">
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-success">Accept</button>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Decline</button>
-														</td>
-													</form>
-												</tr>
+												<?php 
+													foreach($reqTentor->result() as $row){
+														echo '
+															<tr class="gradeX">
+																<form method="post" action="#">
+																	<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
+																	<td>'.$row->NamaLengkap.'</td>
+																	<td>'.$row->MaksimalKonfirmasi.'</td>
+																	<td class="center">
+																		<img class="img-responsive" src="'.$row->BuktiPrestasi.'" class="img">
+																	</td>
+																	<td class="center">
+																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-success">Accept</button>
+																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Decline</button>
+																	</td>
+																</form>
+															</tr>
+														';
+													}
+												?>
 											</tbody>
 										</table>
 					  				</div>
@@ -116,26 +125,32 @@
 												<tr>
 													<th>ID</th>
 													<th>Full Name</th>
-													<th>Bill</th>
 													<th>Deadline</th>
-													<th>Imgage</th>
+													<th width="300px">Image</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Nama -->Wildan</td>
-														<td><!-- BiLL -->12.000.000</td>
-														<td><!-- Tanggal Maksimal -->12 juni 2018</td>
-														<td class="center"><!-- Image --><img src="" class="img"></td>
-														<td class="center">
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-success">Accept</button>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Decline</button>
-														</td>
-													</form>
-												</tr>
+												<?php 
+													foreach($reqSiswa->result() as $row){
+														echo '
+															<tr class="gradeX">
+																<form method="post" action="#">
+																	<td>'.$row->IDSiswa.'<input type="hidden" name="ID" value="'.$row->IDSiswa.'"></td>
+																	<td>'.$row->NamaSiswa.'</td>
+																	<td>'.$row->MaksimalPembayaran.'</td>
+																	<td class="center">
+																		<img class="img-responsive" src="'.$row->BuktiPembayaran.'" class="img">
+																	</td>
+																	<td class="center">
+																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-success">Accept</button>
+																		<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Decline</button>
+																	</td>
+																</form>
+															</tr>
+														';
+													}
+												?>
 											</tbody>
 										</table>
 					  				</div>
@@ -163,14 +178,18 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Nama -->Wildan</td>
-														<td><!-- Rating -->10/10</td>
-														<td class="center"><!-- Salary -->Rp. 90.000,00</td>
-													</form>
-												</tr>
+												<?php
+													foreach ($dataSalary->result() as $row) {
+														echo '
+															<tr class="gradeX">
+																<td>'.$row->ID.'</td>
+																<td>'.$row->NamaLengkap.'</td>
+																<td>10/10</td>
+																<td class="center">Rp. '.$row->Gaji.'</td>
+															</tr>
+														';
+													}
+												?>
 											</tbody>
 										</table>
 					  				</div>
@@ -188,7 +207,7 @@
 										<div class="panel-title">CRUD Teacher</div>
 									</div>
 					  				<div class="panel-body">
-					  					<div><button id="addTeacher" class="btn btn-info">Show/Hide Form Add</button></div>
+					  					<div><button id="addTeacher" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
 					  						<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>addTeacher">
@@ -367,7 +386,7 @@
 										<div class="panel-title">CRUD Student</div>
 									</div>
 					  				<div class="panel-body">
-					  					<div><button id="addStudent" class="btn btn-info">Show/Hide Form Add</button></div>
+					  					<div><button id="addStudent" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
 					  						<form class="authpage-form" id="form-fulldata2" method="post" action="<?php echo base_url()?>addStudent">
@@ -603,7 +622,7 @@
 										<div class="panel-title">CRUD Author</div>
 									</div>
 					  				<div class="panel-body">
-					  					<div><button id="addAuthor" class="btn btn-info">Show/Hide Form Add</button></div>
+					  					<div><button id="addAuthor" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
 					  						<form class="authpage-form" id="form-fulldata3" method="post" action="<?php echo base_url()?>addAuthor">
@@ -651,6 +670,45 @@
 														</td>
 													</form>
 												</tr>
+											</tbody>
+										</table>
+					  				</div>
+					  			</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section id="comment">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-10">
+								<div class="content-box-large">
+					  				<div class="panel-heading">
+										<div class="panel-title">Comments</div>
+									</div>
+					  				<div class="panel-body">
+					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="commentTable">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Email</th>
+													<th>Comments</th>
+													<th>Date</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+													foreach ($dataComment->result() as $row) {
+														echo '
+															<tr class="gradeX">
+																<td>'.$row->NamaLengkap.'</td>
+																<td>'.$row->Email.'</td>
+																<td class="center">'.$row->Komentar.'</td>
+																<td class="center">'.$row->Tanggal.'</td>
+															</tr>
+														';
+													}
+												?>
 											</tbody>
 										</table>
 					  				</div>
@@ -708,12 +766,14 @@
     		$('#teacher').hide();
     		$('#student').hide();
     		$('#author').hide();
+    		$('#comment').hide();
     		$('.bar').click(function(){
     			$('#dashboard').hide();
     			$('#salary').hide();
 				$('#teacher').hide();
 				$('#student').hide();
 				$('#author').hide();
+				$('#comment').hide();
     			$('.bar').removeClass( "current" );
     			$(this).addClass("current");
     		});
@@ -731,6 +791,9 @@
     		});
     		$('.author').click(function(){
     			$('#author').show();
+    		});
+    		$('.comment').click(function(){
+    			$('#comment').show();
     		});
 			$('#addTeacher').click(function(){
     			$('#form-fulldata').toggle();

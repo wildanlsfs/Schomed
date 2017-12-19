@@ -50,19 +50,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Home';
+$route['contact_us'] = 'Home/contact_us';
+
 $route['signin'] = 'Auth_Page';
 $route['signup'] = 'Auth_Page/signup';
 $route['signin_redirect']='Auth_Page/userLogin';
 $route['signup_redirect']='Auth_Page/userRegistration';
 $route['privacy_policy'] = 'Auth_Page/privacypolicy';
+
 $route['fill_student_data'] = 'Registration/fillDataSiswa1';
 $route['bill'] = 'Registration/verifySiswa';
 $route['fill_teacher_data'] = 'Registration/fillDataTentor1';
 $route['achievement'] = 'Registration/verifyTentor';
 $route['waiting_for_confirmation'] = 'Registration/waiting_for_confirmation';
+
 $route['admin/login'] = 'Admin_Page/login';
-$route['admin/home'] = 'Admin_Page/index';
+$route['admin'] = 'Admin_Page';
 $route['author'] = 'Admin_Page/author';
+$route['teacher'] = 'Admin_Page/teacher';
+$route['student'] = 'Admin_Page/student';
 $route['auth'] = 'Admin_Page/auth';
+$route['addArticle'] = 'Admin_Page/addArticle';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

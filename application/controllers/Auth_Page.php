@@ -100,8 +100,9 @@ class Auth_Page extends CI_Controller {
 				$result = $this->Model_Siswa->checkData1($id);
 
 				$newdata = array(
-					'ID' 		=> $id,
-			        'logged_in'  => TRUE
+					'ID' 			=> $id,
+			        'logged_in'  	=> TRUE,
+			        'username' 		=> $data['Email']
 				);
 
 				$this->session->set_userdata($newdata);
@@ -143,7 +144,8 @@ class Auth_Page extends CI_Controller {
 				$result = $this->Model_Tentor->checkData1($id);
 				$newdata = array(
 					'ID' 		=> $id,
-			        'logged_in'  => TRUE
+			        'logged_in'  => TRUE,
+			        'username' 		=> $data['Email']
 				);
 
 				$this->session->set_userdata($newdata);
@@ -188,5 +190,10 @@ class Auth_Page extends CI_Controller {
 	public function privacyPolicy()
 	{
 		$this->load->view('v_privacy_policy');
+	}
+
+	public function BillingStatement($data)
+	{
+		$this->load->helper('v_billing.php', $data);
 	}
 }
