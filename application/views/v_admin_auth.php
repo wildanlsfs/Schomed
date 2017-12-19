@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pass">Password</label>
-					<input type="password" class="form-control" name="pass" placeholder="Password" required pattern=".{8,}" title="Password Minimal 8 Karakter">
+					<input type="password" class="form-control" name="pass" placeholder="Password" required title="Masukkan Password">
 					<div id="errorpass"></div>
 				</div>
 				<button type="submit" class="authpage-button">MASUK</button>

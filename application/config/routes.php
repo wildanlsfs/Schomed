@@ -64,13 +64,16 @@ $route['fill_teacher_data'] = 'Registration/fillDataTentor1';
 $route['achievement'] = 'Registration/verifyTentor';
 $route['waiting_for_confirmation'] = 'Registration/waiting_for_confirmation';
 
-$route['admin/login'] = 'Admin_Page/login';
-$route['admin'] = 'Admin_Page';
+$route['admin/login'] = 'Admin_Page';
+$route['admin'] = 'Admin_Page/admin';
 $route['author'] = 'Admin_Page/author';
 $route['teacher'] = 'Admin_Page/teacher';
 $route['student'] = 'Admin_Page/student';
 $route['auth'] = 'Admin_Page/auth';
 $route['addArticle'] = 'Admin_Page/addArticle';
+$route['addAuthor'] = 'Admin_Page/addAuthor';
+$route['addTeacher'] = 'Admin_Page/addTeacher';
+$route['addStudent'] = 'Admin_Page/addStudent';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

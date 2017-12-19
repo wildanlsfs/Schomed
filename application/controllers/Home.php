@@ -12,10 +12,8 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		if(isset($_SESSION['logged_in'])){
-			unset($_SESSION['logged_in']);
-			unset($_SESSION['ID']);
-			unset($_SESSION['username']);
+		if(isset($_SESSION['ID'])){
+			$this->session->sess_destroy();
 		}
 		$this->load->view('v_home');
 	}

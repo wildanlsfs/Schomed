@@ -39,7 +39,11 @@
 						<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 							<ul class="nav navbar-nav">
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <b class="caret"></b></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										<?php if(isset($_SESSION['logged_in'])){
+											echo $_SESSION['username'];
+										}?>
+									 <b class="caret"></b></a>
 									<ul class="dropdown-menu animated fadeInUp">
 										<li><a href="<?php echo base_url();?>">Logout</a></li>
 									</ul>
@@ -75,25 +79,21 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherRequest">
 											<thead>
 												<tr>
-													<th>ID</th>
 													<th>Mata Pelajaran</th>
 													<th>Materi</th>
 													<th>Ringkasan</th>
-													<th>Foto</th>
+													<th width="300px">Foto</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Mata Pelajaran-->Matematika</td>
-														<td >
-															<!-- Materi -->Ini Materinya
-														</td>
-														<td><!-- Ringkasan Maksimal -->ini ringkasannya panjang bener anjiang wwkwkwk asdjaksd asjdkasd asdjwa dasdjas dawd awd kawdjn askndk nasdksa dknask dkas</td>
-														<td class="center"><!-- Image --><img src="" class="img"></td>
-													</form>
-												</tr>
+												<?php foreach($dataHistory as $row)
+													echo '<tr class="gradeX">
+															<td>'.$row->Mapel.'</td>
+															<td >'.$row->Materi.'</td>
+															<td>'.$row->Ringkasan.'</td>
+															<td class="center"><!-- Image --><img src="'.$row->Dokumentasi.'" class="img-responsive"></td>
+														</tr>';
+												?>
 											</tbody>
 										</table>
 					  				</div>

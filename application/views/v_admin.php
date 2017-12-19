@@ -39,7 +39,11 @@
 						<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 							<ul class="nav navbar-nav">
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <b class="caret"></b></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<?php if(isset($_SESSION['logged_in_admin'])){
+											echo $_SESSION['Username'];
+										}?> 
+										<b class="caret"></b></a>
 									<ul class="dropdown-menu animated fadeInUp">
 										<li><a href="<?php echo base_url();?>">Logout</a></li>
 									</ul>
@@ -79,11 +83,11 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherRequest">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th width="30px">ID</th>
 													<th>Full Name</th>
 													<th>Deadline</th>
 													<th width="300px">Image</th>
-													<th>Action</th>
+													<th width="75px">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -123,11 +127,11 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="studentRequest">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th width="30px">ID</th>
 													<th>Full Name</th>
 													<th>Deadline</th>
 													<th width="300px">Image</th>
-													<th>Action</th>
+													<th width="75px">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -171,7 +175,7 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherSalary">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th width="30px">ID</th>
 													<th>Full Name</th>
 													<th>Rating</th>
 													<th>Salary</th>
@@ -345,30 +349,34 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="teacherCRUD">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th width="30px">ID</th>
 													<th>Full Name</th>
 													<th>Gender</th>
 													<th>Phone Number</th>
 													<th>University</th>
 													<th>Status</th>
-													<th>Action</th>
+													<th width="75px">Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Nama -->Wildan</td>
-														<td><!-- Gender -->Laki-Laki</td>
-														<td><!-- Phone Number -->085256424749</td>
-														<td><!-- University -->Institut Teknologi Sepuluh Nopember</td>
-														<td><!-- Status -->Teaching</td>
-														<td>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info">Edit</button>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Delete</button>
-														</td>
-													</form>
-												</tr>
+												<?php foreach($dataTeacher->result() as $row){
+													echo '
+														<tr class="gradeX">
+															<form>
+																<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
+																<td>'.$row->NamaLengkap.'</td>
+																<td>'.$row->JenisKelamin.'</td>
+																<td>'.$row->NoTelp.'</td>
+																<td>'.$row->AsalUniv.'</td>
+																<td>'.$row->Status.'</td>
+																<td>
+																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-teacher">Edit</button>
+																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete">Delete</button>
+																</td>
+															</form>
+														</tr>
+													';
+												}?>
 											</tbody>
 										</table>
 					  				</div>
@@ -583,28 +591,32 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="studentCRUD">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th width="30px">ID</th>
 													<th>Full Name</th>
 													<th>Phone Number</th>
-													<th>Genre</th>
+													<th>Gender</th>
 													<th>Status</th>
-													<th>Action</th>
+													<th width="75px">Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Nama -->Wildan Lutfi</td>
-														<td><!-- NoTelp -->085256424749</td>
-														<td><!-- Gender -->Laki-Laki</td>
-														<td><!-- status -->Learning</td>
-														<td>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info">Edit</button>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Delete</button>
-														</td>
-													</form>
-												</tr>
+												<?php foreach($dataStudent->result() as $row){
+													echo '
+														<tr class="gradeX">
+															<form>
+																<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
+																<td>'.$row->NamaLengkap.'</td>
+																<td>'.$row->NoTelp.'</td>
+																<td>'.$row->JenisKelamin.'</td>
+																<td>'.$row->Status.'</td>
+																<td>
+																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-student">Edit</button>
+																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete">Delete</button>
+																</td>
+															</form>
+														</tr>
+													';
+												}?>
 											</tbody>
 										</table>
 					  				</div>
@@ -630,10 +642,6 @@
 													<label for="uname">Username</label>
 													<input type="text" class="form-control" name="uname" placeholder="Username" required >
 												</div>
-					  							<div class="form-group">
-													<label for="email">Email</label>
-													<input type="email" class="form-control" name="email" placeholder="Email" required >
-												</div>
 												<div class="form-group">
 													<label for="pass">Password</label>
 													<input id="pass" type="password" class="form-control" name="pass" placeholder="Password" required >
@@ -652,24 +660,26 @@
 					  					<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="authorCRUD">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th width="30px">ID</th>
 													<th>Username</th>
-													<th>Email</th>
-													<th>Action</th>
+													<th width="75px">Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="gradeX">
-													<form>
-														<td><!-- ID -->1<input type="hidden" name="ID" value="#"></td>
-														<td><!-- Nama -->SemutLiar</td>
-														<td><!-- Gender -->wildanlsfs@gmail.com</td>
-														<td>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info">Edit</button>
-															<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger">Delete</button>
-														</td>
-													</form>
-												</tr>
+												<?php foreach($dataAuthor->result() as $row){
+													echo '
+														<tr class="gradeX">
+															<form>
+																<td>'.$row->ID.'<input type="hidden" name="ID" value="'.$row->ID.'"></td>
+																<td>'.$row->Username.'</td>
+																<td>
+																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-info btn-edit-author">Edit</button>
+																	<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-danger btn-delete">Delete</button>
+																</td>
+															</form>
+														</tr>
+													';
+												}?>
 											</tbody>
 										</table>
 					  				</div>

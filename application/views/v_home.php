@@ -76,11 +76,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     	<h3><a href="signup">DAFTAR</a></h3>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                 	<div class="col-md-12 ">
                     	<h3><a href="article">BACA ARTIKEL</a></h3>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </header>

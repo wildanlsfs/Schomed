@@ -122,8 +122,7 @@ class Auth_Page extends CI_Controller {
 							redirect(base_url().'waiting_for_confirmation','refresh');
 						}
 						else {
-							//Menampilkan UI SISWA
-							echo $result;
+							redirect('student','refresh');
 						}
 						
 					}
@@ -167,7 +166,7 @@ class Auth_Page extends CI_Controller {
 						}
 						else {
 							//Menampilkan UI Tentor
-							echo $result;
+							redirect('teacher','refresh');
 						}
 						
 					}
