@@ -69,11 +69,6 @@ class Admin_Page extends CI_Controller {
 
 	}
 
-	public function CRUD($value='')
-	{
-		# code...
-	}
-
 	public function author()
 	{
 		if(!isset($_SESSION['logged_in_admin'])){
@@ -102,13 +97,28 @@ class Admin_Page extends CI_Controller {
 
 	public function addAuthor()
 	{
-		$data = array(
-			"Username"		=> $this->input->post("uname"),
-			"Pass"			=> md5($this->input->post("pass"))
-		);
+		$data = "'".$this->input->post("uname")."'";
+		$query = $this->db->query("SELECT * FROM admin WHERE Username = $data LIMIT 1");
+		if($query->num_rows() != 1){
+			$data = array(
+				"Username"		=> $this->input->post("uname"),
+				"Pass"			=> md5($this->input->post("pass")),
+				"Authority"		=> $this->input->post("authority"),
+			);
 
-		$this->db->insert('admin', $data);
+			$this->db->insert('admin', $data);
 
+			$newdata = array(
+				"pesan" 	=> "Success"
+			);
+			$this->session->set_userdata($newdata);
+		}
+		else{
+			$newdata = array(
+				"pesan" 	=> "username has been used"
+			);
+			$this->session->set_userdata($newdata);
+		}
 		redirect('admin', 'refresh');
 	}
 
@@ -131,7 +141,6 @@ class Admin_Page extends CI_Controller {
 			$image_path = base_url("uploads/".$info['raw_name'].$info['file_ext']);
 
 			$ID = $_SESSION['ID'];
-
 			$query = $this->db->query("SELECT IDSiswa FROM jadwal WHERE IDTentor = $ID");
 			$query = $query->row();
 			$IDSiswa = $query->IDSiswa;
@@ -144,6 +153,8 @@ class Admin_Page extends CI_Controller {
 				"Ringkasan"		=> $this->input->post("ringkasan"),
 				"Dokumentasi"	=> $image_path
 			);
+
+			$query2 = $this->db->query("UPDATE jadwal SET KuotaTerpakai = KuotaTerpakai + 1 WHERE IDTentor = $ID AND Status = 'Learning'");
 
 			$this->db->insert('history', $data);
 
@@ -160,11 +171,10 @@ class Admin_Page extends CI_Controller {
 		}
 		$id = $_SESSION['ID'];
 
-
 		$query = $this->db->query("SELECT Status FROM tentor WHERE ID = $id");
 		$query = $query->row();
 
-		$query2 = $this->db->query("SELECT a.NamaLengkap, a.NoTelp, a.IDLine, a.Tingkatan, a.BanyakSiswa, a.DurasiBelajar, a.BanyakPertemuan, a.ProgramBelajar, a.TipeKelas, b.Mapel FROM  siswa a, jadwal b WHERE a.id = (SELECT IDSiswa FROM jadwal WHERE IDTentor = $id)");
+		$query2 = $this->db->query("SELECT a.NamaLengkap, a.NoTelp, a.IDLine, a.Tingkatan, a.BanyakSiswa, a.DurasiBelajar, a.BanyakPertemuan, a.ProgramBelajar, a.TipeKelas, b.Mapel FROM  siswa a, jadwal b WHERE a.id = (SELECT IDSiswa FROM jadwal WHERE IDTentor = $id AND Status = 'Learning' LIMIT 1) AND a.ID = b.IDSiswa AND b.IDTentor = $id");
 		$query2 = $query2->row();
 		$data = array(
 			'dataHistory' 	=> $this->Model_Admin->listHistoryTeacher(),
@@ -173,6 +183,46 @@ class Admin_Page extends CI_Controller {
 		);
 		
 		$this->load->view('v_tentor', $data);
+	}
+
+	public function finishTeaching()
+	{
+	    $data = $this->input->post('ID');
+		$query = $this->db->query("UPDATE  tentor SET Status = 'Available' WHERE ID = $data");
+		$query = $this->db->query("UPDATE  jadwal SET Status = 'Waiting For Confirmation' WHERE IDTentor = $data");
+		$query = $this->db->query("UPDATE  waiting_list SET Status = 2 WHERE IDSiswa = (SELECT IDSiswa FROM jadwal WHERE IDTentor = $data LIMIT 1)");
+	}
+
+	public function checkStudentStatus()
+	{
+		$data = $this->input->post('ID');
+		$query = $this->db->query("UPDATE  jadwal SET Status = 'Selesai' WHERE IDSiswa = $data AND Status = 'Waiting For Confirmation'");
+		$status = $this->Model_Admin->updateStudentStatus($data);
+		
+		if($status  == "Selesai"){
+			$query = $this->db->query("UPDATE  siswa SET Status = 'Selesai' WHERE ID = $data");
+			$path = $this->db->query("SELECT BuktiPembayaran FROM waiting_list WHERE IDSiswa = $data");
+			$path = $path->row();
+			$path = $path->BuktiPembayaran;
+			$arr = explode("/", $path);
+			$filename = $arr[4].'/'.$arr[5];
+			unlink($filename);
+			
+			$query = $this->db->query("DELETE FROM waiting_list WHERE IDSiswa = $data");
+		}
+
+	}
+
+	public function vacation()
+	{
+	    $data = $_SESSION['ID'];
+		$query = $this->db->query("UPDATE  tentor SET Status = 'Vacation' WHERE ID = $data");
+	}
+
+	public function endVacation()
+	{
+	    $data = $_SESSION['ID'];
+		$query = $this->db->query("UPDATE  tentor SET Status = 'Available' WHERE ID = $data");
 	}
 
 	public function student()
@@ -212,7 +262,7 @@ class Admin_Page extends CI_Controller {
 		$query = $this->db->query("UPDATE  siswa SET status = 'Learning' WHERE ID = $data");
 		$query = $this->db->query("UPDATE  jadwal SET status = 'Learning' WHERE IDSiswa = $data");
 		$query = $this->db->query("UPDATE  waiting_list SET status = 1 WHERE IDSiswa = $data");
-		$query = $this->db->query("UPDATE tentor SET STATUS = 'Teaching' WHERE ID = (SELECT IDTentor FROM jadwal WHERE IDSiswa = $data LIMIT 1)");
+		$query = $this->db->query("UPDATE tentor SET STATUS = 'Teaching' WHERE ID IN (SELECT IDTentor FROM jadwal WHERE IDSiswa = $data)");
 	}
 
 	public function declineTeacher()
@@ -232,12 +282,15 @@ class Admin_Page extends CI_Controller {
 		$query = $this->db->query("DELETE FROM waiting_list  WHERE IDSiswa = $data");
 	}
 
+	public function addQuota()
+	{
+		$data = $this->input->post('ID');
+			
+	}
+
 	public function coba()
 	{
-		$query = $this->db->query("SELECT ID, NamaLengkap, JenisKelamin, NoTelp, AsalUniv, Status FROM tentor WHERE Status != 'Belum Diterima'");
-		$result = $query->result();
 
-		print_r($result);
 	}
 
 }

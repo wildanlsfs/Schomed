@@ -86,7 +86,8 @@
 											<thead>
 												<tr>
 													<th width="30px">ID</th>
-													<th>Full Name</th>
+													<th>Email</th>
+													<th>Course</th>
 													<th>Deadline</th>
 													<th width="150px">Image</th>
 													<th width="75px">Action</th>
@@ -98,17 +99,25 @@
 														echo '
 															<tr class="gradeX">
 																<td>'.$row->ID.'</td>
-																<td>'.$row->NamaLengkap.'</td>
+																<td>'.$row->Email.'</td>
+																<td>'.$row->Mapel.'</td>
 																<td>'.$row->MaksimalKonfirmasi.'</td>
 																<td class="center">
 																	<img class="img-responsive" src="'.$row->BuktiPrestasi.'" class="img">
 																</td>
-																<td class="center">
-																	<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-accept-teacher" value="'.$row->ID.'">Accept</button>
-																	<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-teacher" value="'.$row->ID.'">Decline</button>
-																</td>
-															</tr>
-														';
+																<td class="center">';
+														if($row->BuktiPrestasi != NULL){
+															echo '<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-accept-teacher" value="'.$row->ID.'">Accept</button>
+																		<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-teacher" value="'.$row->ID.'">Decline</button>
+																	</td>
+																</tr>
+															';
+														}else {
+															echo '<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-teacher" value="'.$row->ID.'">Decline</button>
+																	</td>
+																</tr>
+															';
+														}
 													}
 												?>
 											</tbody>
@@ -128,8 +137,8 @@
 											<thead>
 												<tr>
 													<th width="30px">ID</th>
-													<th>Full Name</th>
-													<th>Total Pembayaran</th>
+													<th>Email</th>
+													<th>Bill</th>
 													<th>Deadline</th>
 													<th width="150px">Image</th>
 													<th width="75px">Action</th>
@@ -141,18 +150,25 @@
 														echo '
 															<tr class="gradeX">
 																<td>'.$row->IDSiswa.'</td>
-																<td>'.$row->NamaSiswa.'</td>
+																<td>'.$row->Email.'</td>
 																<td>'.$row->JumlahPembayaran.'</td>
 																<td>'.$row->MaksimalPembayaran.'</td>
 																<td class="center">
 																	<img class="img-responsive" src="'.$row->BuktiPembayaran.'" class="img">
 																</td>
-																<td class="center">
-																	<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-accept-student" value="'.$row->IDSiswa.'">Accept</button>
-																	<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-student" value="'.$row->IDSiswa.'">Decline</button>
-																</td>
-															</tr>
-														';
+																<td class="center">';
+														if($row->BuktiPembayaran != NULL){
+															echo '<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-accept-student" value="'.$row->IDSiswa.'">Accept</button>
+																		<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-student" value="'.$row->IDSiswa.'">Decline</button>
+																	</td>
+																</tr>
+															';
+														}else {
+															echo '<button style="margin-top: 5px;" class="btn btn-xs btn-danger btn-decline-student" value="'.$row->IDSiswa.'">Decline</button>
+																	</td>
+																</tr>
+															';
+														}
 													}
 												?>
 											</tbody>
@@ -357,6 +373,8 @@
 													<th>Full Name</th>
 													<th>Gender</th>
 													<th>Phone Number</th>
+													<th>Line</th>
+													<th>Course</th>
 													<th>University</th>
 													<th>Status</th>
 													<!-- <th width="75px">Action</th> -->
@@ -370,10 +388,17 @@
 															<td>'.$row->NamaLengkap.'</td>
 															<td>'.$row->JenisKelamin.'</td>
 															<td>'.$row->NoTelp.'</td>
+															<td>'.$row->IDLine.'</td>
+															<td>'.$row->Mapel .'</td>
 															<td>'.$row->AsalUniv.'</td>
-															<td>'.$row->Status.'</td>
-														</tr>
-													';
+															<td>
+															'.$row->Status;
+
+													if($row->Status != "Available" && $row->Status != "Waiting"){
+														echo '  '.'<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-finish-teaching" value="'.$row->ID.'"><span class="glyphicon glyphicon-ok"></span></button>
+															</td>
+														</tr>';
+													}
 													// echo '
 													// 	<tr class="gradeX">
 													// 		<td>'.$row->ID.'</td>
@@ -605,9 +630,13 @@
 												<tr>
 													<th width="30px">ID</th>
 													<th>Full Name</th>
-													<th>Phone Number</th>
 													<th>Gender</th>
+													<th>Phone Number</th>
+													<th>Line</th>
+													<th>Course</th>
+													<th>Quota</th>
 													<th>Status</th>
+													<th>Action</th>
 													<!-- <th width="75px">Action</th> -->
 												</tr>
 											</thead>
@@ -618,11 +647,19 @@
 														<tr class="gradeX">
 															<td>'.$row->ID.'</td>
 															<td>'.$row->NamaLengkap.'</td>
-															<td>'.$row->NoTelp.'</td>
 															<td>'.$row->JenisKelamin.'</td>
-															<td>'.$row->Status.'</td>
-														</tr>
-													';
+															<td>'.$row->NoTelp.'</td>
+															<td>'.$row->IDLine.'</td>
+															<td>'.$row->Mapel.'</td>
+															<td>'.$row->KuotaTerpakai.'/'.$row->Kuota.'</td>
+														';
+													echo '<td>'.$row->Status.'</td><td>';
+													if($row->KuotaTerpakai >= $row->Kuota){
+														echo '<button style="margin-top: 5px;" class="btn btn-xs btn-success btn-finish-learning" value="'.$row->ID.'">Update Status</button>';
+													}else{
+														echo 'No Action';
+													}
+													echo '</td></tr>';
 													// echo '
 													// 	<tr class="gradeX">
 													// 		<td>'.$row->ID.'</td>
@@ -653,6 +690,11 @@
 										<div class="panel-title">Add or Delete Author</div>
 									</div>
 					  				<div class="panel-body">
+					  					<?php if(isset($_SESSION['pesan'])){
+					  						echo '<script>alert("';
+											echo $_SESSION['pesan'];
+											echo '");</script>';
+										}?> 
 					  					<div><button id="addAuthor" class="btn btn-info btn-xs">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
@@ -664,6 +706,17 @@
 												<div class="form-group">
 													<label for="pass">Password</label>
 													<input id="pass" type="password" class="form-control" name="pass" placeholder="Password" required >
+												</div>
+												<div class="form-group">
+													<label for="authority">Authority</label>
+													<select name="authority" class="form-control" required>
+														<?php 
+															if($_SESSION['ID'] == 1 || $_SESSION['ID'] == 3){
+																echo '<option value="1">Admin</option>';
+															}
+														?>
+														<option value="2">Author</option>
+													</select>
 												</div>
 												<button type="submit" style="margin-top: 5px;" class="btn btn-xs btn-primary">Add</button>
 											</form>
@@ -1130,13 +1183,14 @@
 					var thisOne = $(this);
 					var id = $(this).val();
 					$.ajax({
-						url: "<?php echo base_url();?>admin_page/deleteAuthor",
+						url: "<?php echo base_url();?>Admin_Page/deleteAuthor",
 						method: "POST",
 						data: {ID: id },
 						success: function(response){
 							thisOne.closest('tr').fadeOut(800, function(){ 
 								$(this).remove();
 							});
+							location.reload();
 						}
 
 					});
@@ -1148,7 +1202,7 @@
 					var id = $(this).val();
 					var gaji = $(this).prev().val();
 					$.ajax({
-						url: "<?php echo base_url();?>admin_page/changeSalary",
+						url: "<?php echo base_url();?>Admin_Page/changeSalary",
 						method: "POST",
 						data: {ID: id, Gaji: gaji },
 						success: function(response){
@@ -1162,13 +1216,14 @@
 					var thisOne = $(this);
 					var id = $(this).val();
 					$.ajax({
-						url: "<?php echo base_url();?>admin_page/acceptTeacher",
+						url: "<?php echo base_url();?>Admin_Page/acceptTeacher",
 						method: "POST",
 						data: {ID: id },
 						success: function(response){
 							thisOne.closest('tr').fadeOut(800, function(){ 
 								$(this).remove();
 							});
+							location.reload();
 						},
 						error: function(tr){
 							$('#testError').html(tr.responseText)
@@ -1182,13 +1237,14 @@
 					var thisOne = $(this);
 					var id = $(this).val();
 					$.ajax({
-						url: "<?php echo base_url();?>admin_page/declineTeacher",
+						url: "<?php echo base_url();?>Admin_Page/declineTeacher",
 						method: "POST",
 						data: {ID: id },
 						success: function(response){
 							thisOne.closest('tr').fadeOut(800, function(){ 
 								$(this).remove();
 							});
+							location.reload();
 						},
 						error: function(tr){
 							$('#testError').html(tr.responseText)
@@ -1202,13 +1258,14 @@
 					var thisOne = $(this);
 					var id = $(this).val();
 					$.ajax({
-						url: "<?php echo base_url();?>admin_page/acceptStudent",
+						url: "<?php echo base_url();?>Admin_Page/acceptStudent",
 						method: "POST",
 						data: {ID: id },
 						success: function(response){
 							thisOne.closest('tr').fadeOut(800, function(){ 
 								$(this).remove();
 							});
+							location.reload();
 						},
 						error: function(tr){
 							$('#testError').html(tr.responseText)
@@ -1222,13 +1279,52 @@
 					var thisOne = $(this);
 					var id = $(this).val();
 					$.ajax({
-						url: "<?php echo base_url();?>admin_page/declineStudent",
+						url: "<?php echo base_url();?>Admin_Page/declineStudent",
 						method: "POST",
 						data: {ID: id },
 						success: function(response){
 							thisOne.closest('tr').fadeOut(800, function(){ 
 								$(this).remove();
 							});
+							location.reload();
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-finish-teaching').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>Admin_Page/finishTeaching",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							alert("Success!");
+							location.reload();
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-finish-learning').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>Admin_Page/checkStudentStatus",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							alert("Success!");
+							location.reload();
 						},
 						error: function(tr){
 							$('#testError').html(tr.responseText)

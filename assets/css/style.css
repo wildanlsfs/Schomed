@@ -255,6 +255,25 @@ blockquote p {
   	cursor: pointer;
 }
 
+.authpage-button-medium{
+	transition-duration: 0.5s;
+	padding: 10px;
+	width: 45%;
+	color: #FFF;
+  	background: #038d3d;
+  	border: none;
+  	font-weight: bold;
+  	font-size: 15px;
+
+}
+
+.authpage-button-medium:hover{
+	transition-duration: 0.5s;
+	color: #038d3d;
+  	background: #DDD;
+  	cursor: pointer;
+}
+
 .authpage-content{
 	padding: 20px;
 }

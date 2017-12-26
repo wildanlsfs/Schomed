@@ -30,7 +30,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<br>
 			<h1>Hello!</h1>
 			<h3>Tolong Lengkapi Data Anda!</h3>
-			<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>achievement">
+			<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>achievement" onsubmit="document.getElementById('selanjutnya').disabled=true;
+document.getElementById('selanjutnya').value='Sedang Mengirim Berkas, Mohon Tunggu...';">
 				<div class="form-group">
 					<label for="fname">Nama Lengkap</label>
 					<input type="text" class="form-control" name="fname" placeholder="Nama Lengkap" required pattern="[A-Za-z].{4,}" title="Nama Minimal 4 Karakter Alphabet">
@@ -101,12 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 				</div>
 				<div class="form-group">
-					<label>Mata Pelajaran Yang Ingin Diajarkan</label>
-					<br>
-					<i>Minimal 1 Mata Pelajaran</i>
-					<br>
-					<br>
-					<label for="mapel1">Mata Pelajaran Pertama</label>
+					<label for="mapel1">Mata Pelajaran Yang Ingin Diajarkan</label>
 					<select class="form-control" name="mapel1" form="form-fulldata" required>
 						<option value="" disabled selected>-- Pilih --</option>
 						<option value="matematika">Matematika</option>
@@ -118,34 +114,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<option value="tpa">Tes Potensi Akademik</option>
 						<option value="ipa">IPA Terpadu</option>
 					</select>
-					<br>
-					<label for="mapel2">Mata Pelajaran Kedua</label>
-					<select class="form-control" name="mapel2" form="form-fulldata" >
-						<option value="" disabled selected>-- Pilih --</option>
-						<option value="matematika">Matematika</option>
-						<option value="bindo">Bahasa Indonesia</option>
-						<option value="binggi">Bahasa Inggris</option>
-						<option value="biologi">Biologi</option>
-						<option value="fisika">Fisika</option>
-						<option value="kimia">Kimia</option>
-						<option value="tpa">Tes Potensi Akademik</option>
-						<option value="ipa">IPA Terpadu</option>
-					</select>
-					<br>
-					<label for="mapel3">Mata Pelajaran Ketiga</label>
-					<select class="form-control" name="mapel3" form="form-fulldata" required>
-						<option value="" disabled selected>-- Pilih --</option>
-						<option value="matematika">Matematika</option>
-						<option value="bindo">Bahasa Indonesia</option>
-						<option value="binggi">Bahasa Inggris</option>
-						<option value="biologi">Biologi</option>
-						<option value="fisika">Fisika</option>
-						<option value="kimia">Kimia</option>
-						<option value="tpa">Tes Potensi Akademik</option>
-						<option value="ipa">IPA Terpadu</option>
-					</select>
 				</div>
-				<button type="submit" class="authpage-button">SELANJUTNYA</button>
+				<input type="submit" value="SELANJUTNYA" class="authpage-button" id="selanjutnya">
 			</form>
 		</div>
 	</div>

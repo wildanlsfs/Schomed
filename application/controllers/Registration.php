@@ -91,6 +91,7 @@ class Registration extends CI_Controller {
 				'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
 				'Tingkatan' 	=> $this->input->post('tingkatan'),
 				'Mapel' 		=> $this->input->post('mapel1'),
+				'DurasiBelajar' => $this->input->post('durasibelajar'),
 				'Kuota' 		=> $this->input->post('kuota1'),
 				'Program' 		=> $this->input->post('program'),
 				'TipeKelas' 	=> $this->input->post('classtype')
@@ -109,6 +110,7 @@ class Registration extends CI_Controller {
 					'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
 					'Tingkatan' 	=> $this->input->post('tingkatan'),
 					'Mapel' 		=> $this->input->post('mapel2'),
+					'DurasiBelajar' => $this->input->post('durasibelajar'),
 					'Kuota' 		=> $this->input->post('kuota2'),
 					'Program' 		=> $this->input->post('program'),
 					'TipeKelas' 	=> $this->input->post('classtype')
@@ -129,6 +131,7 @@ class Registration extends CI_Controller {
 				'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
 				'Tingkatan' 	=> $this->input->post('tingkatan'),
 				'Mapel' 		=> $this->input->post('mapel1'),
+				'DurasiBelajar' => $this->input->post('durasibelajar'),
 				'Kuota' 		=> $this->input->post('kuota1'),
 				'Program' 		=> $this->input->post('program'),
 				'TipeKelas' 	=> $this->input->post('classtype')
@@ -147,6 +150,7 @@ class Registration extends CI_Controller {
 					'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
 					'Tingkatan' 	=> $this->input->post('tingkatan'),
 					'Mapel' 		=> $this->input->post('mapel2'),
+					'DurasiBelajar' => $this->input->post('durasibelajar'),
 					'Kuota' 		=> $this->input->post('kuota2'),
 					'Program' 		=> $this->input->post('program'),
 					'TipeKelas' 	=> $this->input->post('classtype')
@@ -165,6 +169,7 @@ class Registration extends CI_Controller {
 						'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
 						'Tingkatan' 	=> $this->input->post('tingkatan'),
 						'Mapel' 		=> $this->input->post('mapel3'),
+						'DurasiBelajar' => $this->input->post('durasibelajar'),
 						'Kuota' 		=> $this->input->post('kuota3'),
 						'Program' 		=> $this->input->post('program'),
 						'TipeKelas' 	=> $this->input->post('classtype')
@@ -179,6 +184,309 @@ class Registration extends CI_Controller {
 				}
 			}
 			
+		}
+		else if($this->input->post('banyakMapel') == 4){
+			$dbmapel1 = array(
+				'IDSiswa'		=> $_SESSION['ID'],
+				'IDTentor'		=> $this->input->post('tentor1'),
+				'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+				'Tingkatan' 	=> $this->input->post('tingkatan'),
+				'Mapel' 		=> $this->input->post('mapel1'),
+				'DurasiBelajar' => $this->input->post('durasibelajar'),
+				'Kuota' 		=> $this->input->post('kuota1'),
+				'Program' 		=> $this->input->post('program'),
+				'TipeKelas' 	=> $this->input->post('classtype')
+
+			);
+			if($this->Model_Siswa->addCourse($dbmapel1)){
+				$report['addCourse'] = TRUE;
+			}
+			else {
+				$report['addCourse'] = FALSE;	
+			}
+			if($this->input->post('kuota2') != 0){
+				$dbmapel2 = array(
+					'IDSiswa'		=> $_SESSION['ID'],
+					'IDTentor'		=> $this->input->post('tentor2'),
+					'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+					'Tingkatan' 	=> $this->input->post('tingkatan'),
+					'Mapel' 		=> $this->input->post('mapel2'),
+					'DurasiBelajar' => $this->input->post('durasibelajar'),
+					'Kuota' 		=> $this->input->post('kuota2'),
+					'Program' 		=> $this->input->post('program'),
+					'TipeKelas' 	=> $this->input->post('classtype')
+
+				);
+				if($this->Model_Siswa->addCourse($dbmapel2)){
+					$report['addCourse'] = TRUE;
+				}
+				else {
+					$report['addCourse'] = FALSE;	
+				}
+				if($this->input->post('kuota3') != 0){
+					$dbmapel3 = array(
+						'IDSiswa'		=> $_SESSION['ID'],
+						'IDTentor'		=> $this->input->post('tentor3'),
+						'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+						'Tingkatan' 	=> $this->input->post('tingkatan'),
+						'Mapel' 		=> $this->input->post('mapel3'),
+						'DurasiBelajar' => $this->input->post('durasibelajar'),
+						'Kuota' 		=> $this->input->post('kuota3'),
+						'Program' 		=> $this->input->post('program'),
+						'TipeKelas' 	=> $this->input->post('classtype')
+
+					);
+					if($this->Model_Siswa->addCourse($dbmapel3)){
+						$report['addCourse'] = TRUE;
+					}
+					else {
+						$report['addCourse'] = FALSE;	
+					}
+
+					if($this->input->post('kuota4') != 0){
+						$dbmapel3 = array(
+							'IDSiswa'		=> $_SESSION['ID'],
+							'IDTentor'		=> $this->input->post('tentor4'),
+							'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+							'Tingkatan' 	=> $this->input->post('tingkatan'),
+							'Mapel' 		=> $this->input->post('mapel4'),
+							'DurasiBelajar' => $this->input->post('durasibelajar'),
+							'Kuota' 		=> $this->input->post('kuota4'),
+							'Program' 		=> $this->input->post('program'),
+							'TipeKelas' 	=> $this->input->post('classtype')
+
+						);
+						if($this->Model_Siswa->addCourse($dbmapel4)){
+							$report['addCourse'] = TRUE;
+						}
+						else {
+							$report['addCourse'] = FALSE;	
+						}
+					}
+				}
+			}
+		}
+		else if($this->input->post('banyakMapel') == 4){
+			$dbmapel1 = array(
+				'IDSiswa'		=> $_SESSION['ID'],
+				'IDTentor'		=> $this->input->post('tentor1'),
+				'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+				'Tingkatan' 	=> $this->input->post('tingkatan'),
+				'Mapel' 		=> $this->input->post('mapel1'),
+				'DurasiBelajar' => $this->input->post('durasibelajar'),
+				'Kuota' 		=> $this->input->post('kuota1'),
+				'Program' 		=> $this->input->post('program'),
+				'TipeKelas' 	=> $this->input->post('classtype')
+
+			);
+			if($this->Model_Siswa->addCourse($dbmapel1)){
+				$report['addCourse'] = TRUE;
+			}
+			else {
+				$report['addCourse'] = FALSE;	
+			}
+			if($this->input->post('kuota2') != 0){
+				$dbmapel2 = array(
+					'IDSiswa'		=> $_SESSION['ID'],
+					'IDTentor'		=> $this->input->post('tentor2'),
+					'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+					'Tingkatan' 	=> $this->input->post('tingkatan'),
+					'Mapel' 		=> $this->input->post('mapel2'),
+					'DurasiBelajar' => $this->input->post('durasibelajar'),
+					'Kuota' 		=> $this->input->post('kuota2'),
+					'Program' 		=> $this->input->post('program'),
+					'TipeKelas' 	=> $this->input->post('classtype')
+
+				);
+				if($this->Model_Siswa->addCourse($dbmapel2)){
+					$report['addCourse'] = TRUE;
+				}
+				else {
+					$report['addCourse'] = FALSE;	
+				}
+				if($this->input->post('kuota3') != 0){
+					$dbmapel3 = array(
+						'IDSiswa'		=> $_SESSION['ID'],
+						'IDTentor'		=> $this->input->post('tentor3'),
+						'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+						'Tingkatan' 	=> $this->input->post('tingkatan'),
+						'Mapel' 		=> $this->input->post('mapel3'),
+						'DurasiBelajar' => $this->input->post('durasibelajar'),
+						'Kuota' 		=> $this->input->post('kuota3'),
+						'Program' 		=> $this->input->post('program'),
+						'TipeKelas' 	=> $this->input->post('classtype')
+
+					);
+					if($this->Model_Siswa->addCourse($dbmapel3)){
+						$report['addCourse'] = TRUE;
+					}
+					else {
+						$report['addCourse'] = FALSE;	
+					}
+
+					if($this->input->post('kuota4') != 0){
+						$dbmapel4 = array(
+							'IDSiswa'		=> $_SESSION['ID'],
+							'IDTentor'		=> $this->input->post('tentor4'),
+							'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+							'Tingkatan' 	=> $this->input->post('tingkatan'),
+							'Mapel' 		=> $this->input->post('mapel4'),
+							'DurasiBelajar' => $this->input->post('durasibelajar'),
+							'Kuota' 		=> $this->input->post('kuota4'),
+							'Program' 		=> $this->input->post('program'),
+							'TipeKelas' 	=> $this->input->post('classtype')
+
+						);
+						if($this->Model_Siswa->addCourse($dbmapel4)){
+							$report['addCourse'] = TRUE;
+						}
+						else {
+							$report['addCourse'] = FALSE;	
+						}
+						if($this->input->post('kuota5') != 0){
+							$dbmapel5 = array(
+								'IDSiswa'		=> $_SESSION['ID'],
+								'IDTentor'		=> $this->input->post('tentor5'),
+								'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+								'Tingkatan' 	=> $this->input->post('tingkatan'),
+								'Mapel' 		=> $this->input->post('mapel5'),
+								'DurasiBelajar' => $this->input->post('durasibelajar'),
+								'Kuota' 		=> $this->input->post('kuota5'),
+								'Program' 		=> $this->input->post('program'),
+								'TipeKelas' 	=> $this->input->post('classtype')
+
+							);
+							if($this->Model_Siswa->addCourse($dbmapel5)){
+								$report['addCourse'] = TRUE;
+							}
+							else {
+								$report['addCourse'] = FALSE;	
+							}
+						}
+					}
+				}
+			}
+		}
+		else if($this->input->post('banyakMapel') == 4){
+			$dbmapel1 = array(
+				'IDSiswa'		=> $_SESSION['ID'],
+				'IDTentor'		=> $this->input->post('tentor1'),
+				'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+				'Tingkatan' 	=> $this->input->post('tingkatan'),
+				'Mapel' 		=> $this->input->post('mapel1'),
+				'DurasiBelajar' => $this->input->post('durasibelajar'),
+				'Kuota' 		=> $this->input->post('kuota1'),
+				'Program' 		=> $this->input->post('program'),
+				'TipeKelas' 	=> $this->input->post('classtype')
+
+			);
+			if($this->Model_Siswa->addCourse($dbmapel1)){
+				$report['addCourse'] = TRUE;
+			}
+			else {
+				$report['addCourse'] = FALSE;	
+			}
+			if($this->input->post('kuota2') != 0){
+				$dbmapel2 = array(
+					'IDSiswa'		=> $_SESSION['ID'],
+					'IDTentor'		=> $this->input->post('tentor2'),
+					'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+					'Tingkatan' 	=> $this->input->post('tingkatan'),
+					'Mapel' 		=> $this->input->post('mapel2'),
+					'DurasiBelajar' => $this->input->post('durasibelajar'),
+					'Kuota' 		=> $this->input->post('kuota2'),
+					'Program' 		=> $this->input->post('program'),
+					'TipeKelas' 	=> $this->input->post('classtype')
+
+				);
+				if($this->Model_Siswa->addCourse($dbmapel2)){
+					$report['addCourse'] = TRUE;
+				}
+				else {
+					$report['addCourse'] = FALSE;	
+				}
+				if($this->input->post('kuota3') != 0){
+					$dbmapel3 = array(
+						'IDSiswa'		=> $_SESSION['ID'],
+						'IDTentor'		=> $this->input->post('tentor3'),
+						'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+						'Tingkatan' 	=> $this->input->post('tingkatan'),
+						'Mapel' 		=> $this->input->post('mapel3'),
+						'DurasiBelajar' => $this->input->post('durasibelajar'),
+						'Kuota' 		=> $this->input->post('kuota3'),
+						'Program' 		=> $this->input->post('program'),
+						'TipeKelas' 	=> $this->input->post('classtype')
+
+					);
+					if($this->Model_Siswa->addCourse($dbmapel3)){
+						$report['addCourse'] = TRUE;
+					}
+					else {
+						$report['addCourse'] = FALSE;	
+					}
+
+					if($this->input->post('kuota4') != 0){
+						$dbmapel4 = array(
+							'IDSiswa'		=> $_SESSION['ID'],
+							'IDTentor'		=> $this->input->post('tentor4'),
+							'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+							'Tingkatan' 	=> $this->input->post('tingkatan'),
+							'Mapel' 		=> $this->input->post('mapel4'),
+							'DurasiBelajar' => $this->input->post('durasibelajar'),
+							'Kuota' 		=> $this->input->post('kuota4'),
+							'Program' 		=> $this->input->post('program'),
+							'TipeKelas' 	=> $this->input->post('classtype')
+
+						);
+						if($this->Model_Siswa->addCourse($dbmapel4)){
+							$report['addCourse'] = TRUE;
+						}
+						else {
+							$report['addCourse'] = FALSE;	
+						}
+						if($this->input->post('kuota5') != 0){
+							$dbmapel5 = array(
+								'IDSiswa'		=> $_SESSION['ID'],
+								'IDTentor'		=> $this->input->post('tentor5'),
+								'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+								'Tingkatan' 	=> $this->input->post('tingkatan'),
+								'Mapel' 		=> $this->input->post('mapel5'),
+								'DurasiBelajar' => $this->input->post('durasibelajar'),
+								'Kuota' 		=> $this->input->post('kuota5'),
+								'Program' 		=> $this->input->post('program'),
+								'TipeKelas' 	=> $this->input->post('classtype')
+
+							);
+							if($this->Model_Siswa->addCourse($dbmapel5)){
+								$report['addCourse'] = TRUE;
+							}
+							else {
+								$report['addCourse'] = FALSE;	
+							}
+							if($this->input->post('kuota6') != 0){
+								$dbmapel6 = array(
+									'IDSiswa'		=> $_SESSION['ID'],
+									'IDTentor'		=> $this->input->post('tentor6'),
+									'BanyakSiswa' 	=> $this->input->post('banyaksiswa'),
+									'Tingkatan' 	=> $this->input->post('tingkatan'),
+									'Mapel' 		=> $this->input->post('mapel6'),
+									'DurasiBelajar' => $this->input->post('durasibelajar'),
+									'Kuota' 		=> $this->input->post('kuota6'),
+									'Program' 		=> $this->input->post('program'),
+									'TipeKelas' 	=> $this->input->post('classtype')
+
+								);
+								if($this->Model_Siswa->addCourse($dbmapel6)){
+									$report['addCourse'] = TRUE;
+								}
+								else {
+									$report['addCourse'] = FALSE;	
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		if($report['addCourse'] && $report['addToWaitingList'] && $report['fillData']){
@@ -398,6 +706,30 @@ class Registration extends CI_Controller {
 	public function getAvailableTutorList3()
 	{
 		$mapel = $this->input->post('mapel3');
+		$program = $this->input->post('program').$this->input->post('classtype');
+		$data = $this->Model_Tentor->getTutor($mapel,$program);
+		echo json_encode($data);
+	}
+
+	public function getAvailableTutorList4()
+	{
+		$mapel = $this->input->post('mapel4');
+		$program = $this->input->post('program').$this->input->post('classtype');
+		$data = $this->Model_Tentor->getTutor($mapel,$program);
+		echo json_encode($data);
+	}
+
+	public function getAvailableTutorList5()
+	{
+		$mapel = $this->input->post('mapel5');
+		$program = $this->input->post('program').$this->input->post('classtype');
+		$data = $this->Model_Tentor->getTutor($mapel,$program);
+		echo json_encode($data);
+	}
+
+	public function getAvailableTutorList6()
+	{
+		$mapel = $this->input->post('mapel6');
 		$program = $this->input->post('program').$this->input->post('classtype');
 		$data = $this->Model_Tentor->getTutor($mapel,$program);
 		echo json_encode($data);

@@ -50,8 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div id="errorEmail"></div>
 				</div>
 				<div class="form-group">
-					<label for="pass">Password</label>
-					<input type="password" class="form-control" name="pass" placeholder="Password" required pattern=".{8,}" title="Password Minimal 8 Karakter">
+					<label for="pass">Kata Sandi</label>
+					<input type="password" class="form-control" name="pass" placeholder="Kata Sandi" required pattern=".{8,}" title="Kata Sandi Minimal 8 Karakter">
 					<div id="errorPass"></div>
 				</div>
 				<button type="submit" class="authpage-button">MASUK</button>

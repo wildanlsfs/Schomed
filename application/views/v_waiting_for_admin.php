@@ -33,9 +33,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					echo $_SESSION['username'];
 				}?>!</h1>
 			<br>
-			<h3>Data Anda Sedang Dikonfirmasi, Pemberitahuan Selanjutnya Melalui Email</h3>
+			<h3>Data Anda Sedang Dikonfirmasi, Pemberitahuan Selanjutnya Melalui SMS atau LINE</h3>
 			<br>
-			<i>Jika tidak mendapatkan email, harap hubungi 0896-2956-8164</i>
+			<i>Jika tidak mendapatkan pemberitahuan, harap hubungi 089-7525-2575 atau IDLine : schomedindo</i>
 			<br>
 			<a href="<?php echo base_url();?>" style="color: #fff;"><button class="authpage-button">Home</button></a>
 		</div>

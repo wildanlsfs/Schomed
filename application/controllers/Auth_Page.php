@@ -22,7 +22,7 @@ class Auth_Page extends CI_Controller {
 
 		$this->load->model('Model_Tentor');
 
-		
+		$this->load->model('Model_Admin');
 	}
 
 	public function index()
@@ -41,7 +41,14 @@ class Auth_Page extends CI_Controller {
 			session_start();
 		}
 		
-		$data['error'] = "";
+		$Mapel = $this->Model_Admin->listTeacherByMapel();
+		$Program = $this->Model_Admin->listTeacherByProgram();
+
+		$data = array(
+			"error"		=> "",
+			"Mapel"		=> $Mapel,
+			"Program"	=> $Program
+		);
 		$this->load->view('v_signup',$data);
 	}
 

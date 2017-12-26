@@ -260,7 +260,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <a href="https://twitter.com/schoolofmedicos" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name"></span>Twitter</a>
                     </li>
                     <li style="margin: 4px 0px;">
-                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-phone fa-fw"></i> <span class="network-name">0896-2956-8164</span></a>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-phone fa-fw"></i> <span class="network-name">089-7525-2575</span></a>
                     </li>
                     <li style="margin: 4px 0px;">
                         <a href="mailto:schomedindonesia@gmail.com" class="btn btn-default btn-lg"><i class="fa fa-paper-plane fa-fw"></i> <span class="network-name"></span>schomedindonesia@gmail.com</a>

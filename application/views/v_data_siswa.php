@@ -34,7 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<br>
 			<h1>Hello!</h1>
 			<h3>Tolong Lengkapi Data Anda!</h3>
-			<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>bill">
+			<form class="authpage-form" id="form-fulldata" method="post" action="<?php echo base_url()?>bill" onsubmit="document.getElementById('selanjutnya').disabled=true;
+document.getElementById('selanjutnya').value='Sedang Mengirim Berkas, Mohon Tunggu...';">
 				<div class="form-group">
 					<label for="fname">Nama Lengkap</label>
 					<input type="text" class="form-control" name="fname" placeholder="Nama Lengkap" required pattern="[A-Za-z].{4,}" title="Nama Minimal 4 Karakter Alphabet">
@@ -143,6 +144,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<option value="1" selected>1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -187,7 +191,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</select>
 						<br>
 						<label for="kuota2">Banyak Pertemuan Mata pelajaran ke 2</label>
-						<input class="form-control" type="number" id="kuota2" name="kuota2" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="3" max="">
+						<input class="form-control" type="number" id="kuota2" name="kuota2" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="1" max="">
 					</div>
 					<br>
 					<div id="ke3">
@@ -210,10 +214,79 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</select>
 						<br>
 						<label for="kuota3">Banyak Pertemuan Mata pelajaran ke 3</label>
-						<input class="form-control" type="number" id="kuota3" name="kuota3" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="0" max="">
+						<input class="form-control" type="number" id="kuota3" name="kuota3" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="1" max="">
+					</div>
+					<br>
+					<div id="ke4">
+						<label for="mapel4">Mata Pelajaran ke 4</label>
+						<select class="form-control" id="mapel4" name="mapel4" form="form-fulldata"  required title="Harap Pilih">
+							<option value="" selected disabled>Pilih</option>
+							<option value="matematika">Matematika</option>
+							<option value="bindo">Bahasa Indonesia</option>
+							<option value="binggi">Bahasa Inggris</option>
+							<option value="biologi">Biologi</option>
+							<option value="fisika">Fisika</option>
+							<option value="kimia">Kimia</option>
+							<option value="tpa">Tes Potensi Akademik</option>
+							<option value="ipa">IPA Terpadu</option>
+						</select>
+						<br>
+						<label for="tentor4">Tentor Mata Pelajaran Ke 4</label>
+						<select class="form-control" id="tentor4" name="tentor4" form="form-fulldata"  required title="Harap Pilih">
+							<option value="" selected disabled>Pilih</option>
+						</select>
+						<br>
+						<label for="kuota4">Banyak Pertemuan Mata pelajaran ke 4</label>
+						<input class="form-control" type="number" id="kuota4" name="kuota4" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="1" max="">
+					</div>
+					<br>
+					<div id="ke5">
+						<label for="mapel5">Mata Pelajaran ke 5</label>
+						<select class="form-control" id="mapel5" name="mapel5" form="form-fulldata"  required title="Harap Pilih">
+							<option value="" selected disabled>Pilih</option>
+							<option value="matematika">Matematika</option>
+							<option value="bindo">Bahasa Indonesia</option>
+							<option value="binggi">Bahasa Inggris</option>
+							<option value="biologi">Biologi</option>
+							<option value="fisika">Fisika</option>
+							<option value="kimia">Kimia</option>
+							<option value="tpa">Tes Potensi Akademik</option>
+							<option value="ipa">IPA Terpadu</option>
+						</select>
+						<br>
+						<label for="tentor5">Tentor Mata Pelajaran Ke 5</label>
+						<select class="form-control" id="tentor5" name="tentor5" form="form-fulldata"  required title="Harap Pilih">
+							<option value="" selected disabled>Pilih</option>
+						</select>
+						<br>
+						<label for="kuota5">Banyak Pertemuan Mata pelajaran ke 5</label>
+						<input class="form-control" type="number" id="kuota5" name="kuota5" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="1" max="">
+					</div>
+					<br>
+					<div id="ke6">
+						<label for="mapel6">Mata Pelajaran ke 6</label>
+						<select class="form-control" id="mapel6" name="mapel6" form="form-fulldata"  required title="Harap Pilih">
+							<option value="" selected disabled>Pilih</option>
+							<option value="matematika">Matematika</option>
+							<option value="bindo">Bahasa Indonesia</option>
+							<option value="binggi">Bahasa Inggris</option>
+							<option value="biologi">Biologi</option>
+							<option value="fisika">Fisika</option>
+							<option value="kimia">Kimia</option>
+							<option value="tpa">Tes Potensi Akademik</option>
+							<option value="ipa">IPA Terpadu</option>
+						</select>
+						<br>
+						<label for="tentor6">Tentor Mata Pelajaran Ke 6</label>
+						<select class="form-control" id="tentor6" name="tentor6" form="form-fulldata"  required title="Harap Pilih">
+							<option value="" selected disabled>Pilih</option>
+						</select>
+						<br>
+						<label for="kuota3">Banyak Pertemuan Mata pelajaran ke 6</label>
+						<input class="form-control" type="number" id="kuota6" name="kuota6" value="0" required title="Harap Isi Sesuai Dengan Jumlah Pertemuan" min="1" max="">
 					</div>
 				</div>
-				<button type="submit" class="authpage-button">SELANJUTNYA</button>
+				<input type="submit" value="SELANJUTNYA" class="authpage-button" id="selanjutnya">
 			</form>
 		</div>
 	</div>
@@ -240,6 +313,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				var val6 = $('#kuota1').val();
 				var val7 = $('#kuota2').val();
 				var val8 = $('#kuota3').val();
+				var val9 = $('#kuota4').val();
+				var val10 = $('#kuota5').val();
+				var val11 = $('#kuota6').val();
 				var max  = val3;
 
 				if(val1 == "Satu"){
@@ -427,7 +503,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    	$('#kuota1').attr("max", max - val7 - val8);
 			    	$('#kuota2').attr("max", max - val6 - val8);
 			    	$('#kuota3').attr("max", max - val6 - val7);
+			    } else if(val4 == "4"){
+			    	$('#kuota1').attr("max", max - val7 - val8 - val9);
+			    	$('#kuota2').attr("max", max - val6 - val8 - val9);
+			    	$('#kuota3').attr("max", max - val6 - val7 - val9);
+			    	$('#kuota4').attr("max", max - val6 - val7 - val8);
+			    } else if(val4 == "5"){
+			    	$('#kuota1').attr("max", max - val7 - val8 - val9 - val10);
+			    	$('#kuota2').attr("max", max - val6 - val8 - val9 - val10);
+			    	$('#kuota3').attr("max", max - val6 - val7 - val9 - val10);
+			    	$('#kuota4').attr("max", max - val6 - val7 - val8 - val10);
+			    	$('#kuota5').attr("max", max - val6 - val7 - val8 - val9);
+			    } else if(val4 == "6"){
+			    	$('#kuota1').attr("max", max - val7 - val8 - val9 - val10 - val11);
+			    	$('#kuota2').attr("max", max - val6 - val8 - val9 - val10 - val11);
+			    	$('#kuota3').attr("max", max - val6 - val7 - val9 - val10 - val11);
+			    	$('#kuota4').attr("max", max - val6 - val7 - val8 - val10 - val11);
+			    	$('#kuota5').attr("max", max - val6 - val7 - val8 - val9 - val11);
+			    	$('#kuota6').attr("max", max - val6 - val7 - val8 - val9 - val10);
 			    }
+
 			});
 		});
 	</script>
@@ -453,19 +548,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    $(document).ready(function(){
 	    	$('#ke2').hide();
 			$('#ke3').hide();
+			$('#ke4').hide();
+			$('#ke5').hide();
+			$('#ke6').hide();
 	    	$('#banyakMapel').change(function(){
 	    		var val = $(this).val();
 	    		if(val == 1){
 	    			$('#ke2').hide();
 					$('#ke3').hide();
+					$('#ke4').hide();
+					$('#ke5').hide();
+					$('#ke6').hide();
 	    		}
 	    		else if(val == 2){
 	    			$('#ke2').show();
 	    			$('#ke3').hide();
+	    			$('#ke4').hide();
+					$('#ke5').hide();
+					$('#ke6').hide();
 	    		}
 	    		else if(val == 3){
 	    			$('#ke2').show();
 	    			$('#ke3').show();
+	    			$('#ke4').hide();
+					$('#ke5').hide();
+					$('#ke6').hide();
+	    		}
+	    		else if(val == 4){
+	    			$('#ke2').show();
+	    			$('#ke3').show();
+	    			$('#ke4').show();
+					$('#ke5').hide();
+					$('#ke6').hide();
+	    		}
+	    		else if(val == 5){
+	    			$('#ke2').show();
+	    			$('#ke3').show();
+	    			$('#ke4').show();
+					$('#ke5').show();
+					$('#ke6').hide();
+	    		}
+	    		else if(val == 6){
+	    			$('#ke2').show();
+	    			$('#ke3').show();
+	    			$('#ke4').show();
+					$('#ke5').show();
+					$('#ke6').show();
 	    		}
 	    	});
 	        $('#mapel1').change(function(){
@@ -528,6 +656,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	                        html += '<option value='+data[i].ID+'>'+data[i].NamaLengkap+'</option>';
 	                    }
 	                    $('#tentor3').html(html);
+	                }
+	            });
+	        });
+	        $('#mapel4').change(function(){
+	            var val 	= $(this).val();
+	            var val2 	= $('#program').val();
+	            var val3 	= $('#classtype').val();
+	            $.ajax({
+	                url : "<?php echo base_url();?>index.php/Registration/getAvailableTutorList4",
+	                method : "POST",
+	                data : {mapel4: val, program: val2, classtype: val3},
+	                async : false,
+	                dataType : 'json',
+	                success: function(data){
+	                    var html = '';
+	                    var i;
+	                    for(i=0; i<data.length; i++){
+	                        html += '<option value='+data[i].ID+'>'+data[i].NamaLengkap+'</option>';
+	                    }
+	                    $('#tentor4').html(html);
+	                }
+	            });
+	        });
+	        $('#mapel5').change(function(){
+	            var val 	= $(this).val();
+	            var val2 	= $('#program').val();
+	            var val3 	= $('#classtype').val();
+	            $.ajax({
+	                url : "<?php echo base_url();?>index.php/Registration/getAvailableTutorList5",
+	                method : "POST",
+	                data : {mapel5: val, program: val2, classtype: val3},
+	                async : false,
+	                dataType : 'json',
+	                success: function(data){
+	                    var html = '';
+	                    var i;
+	                    for(i=0; i<data.length; i++){
+	                        html += '<option value='+data[i].ID+'>'+data[i].NamaLengkap+'</option>';
+	                    }
+	                    $('#tentor5').html(html);
+	                }
+	            });
+	        });
+	        $('#mapel6').change(function(){
+	            var val 	= $(this).val();
+	            var val2 	= $('#program').val();
+	            var val3 	= $('#classtype').val();
+	            $.ajax({
+	                url : "<?php echo base_url();?>index.php/Registration/getAvailableTutorList6",
+	                method : "POST",
+	                data : {mapel6: val, program: val2, classtype: val3},
+	                async : false,
+	                dataType : 'json',
+	                success: function(data){
+	                    var html = '';
+	                    var i;
+	                    for(i=0; i<data.length; i++){
+	                        html += '<option value='+data[i].ID+'>'+data[i].NamaLengkap+'</option>';
+	                    }
+	                    $('#tentor6').html(html);
 	                }
 	            });
 	        });

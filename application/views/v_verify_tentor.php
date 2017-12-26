@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<i style="color: #F00;"><?php  echo $error;?></i>
 			<?php  endif;?>
 			<br>
-			<i>Unggah bukti prestasi anda dalam kurun waktu maksimal 7 hari, lalu upload bukti prestasi disini!</i>
+			<i>Unggah bukti prestasi anda dalam kurun waktu maksimal 7 hari disini!</i>
 			<br>
 			<br>
 			<?php echo form_open_multipart('Registration/uploadAchievement');?>

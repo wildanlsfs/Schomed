@@ -137,10 +137,7 @@ class Model_Tentor extends CI_Model {
 	
 	public function getTutor($data,$data2)
 	{
-		$query = $this->db->query("SELECT ID,NamaLengkap FROM tentor WHERE ID IN 
-			(SELECT ID FROM tentor WHERE STATUS = 'Available') AND ID IN 
-			(SELECT IDTentor FROM mapel WHERE Mapel = '$data') AND ID IN
-			(SELECT IDTentor FROM program WHERE program = '$data2')");	
+		$query = $this->db->query("SELECT ID,NamaLengkap FROM tentor WHERE STATUS = 'Available' AND ID IN (SELECT IDTentor FROM mapel WHERE Mapel = '$data') AND ID IN (SELECT IDTentor FROM program WHERE program = '$data2')");	
 		return $query->result();
 	}	
 

@@ -72,27 +72,36 @@
 								<div class="content-box-large">
 					  				<div class="panel-heading">
 										<div class="panel-title">Historis Pembelajaran</div>
-										
+										<?php if($dataStatus != "Teaching" && $dataStatus != "Vacation"):?>
+											<div class="panel-options">
+												<button class="btn btn-xs btn-warning btn-vacation">CUTI</button>
+											</div>
+					  					<?php endif;?>
+					  					<?php if($dataStatus == "Vacation"):?>
+					  						<div class="panel-options">
+												<button class="btn btn-xs btn-success btn-endvacation">KEMBALI KERJA</button>
+											</div>
+					  					<?php endif;?>
 									</div>
 					  				<div class="panel-body">
+					  					<?php if($dataStatus != "Teaching" && $dataStatus != "Vacation"):?>
+					  						<div style="color: red;">Anda Tidak Memiliki Murid Saat Ini!</div>
+					  						<hr>
+					  					<?php endif;?>
+					  					<?php if($dataStatus == "Vacation"):?>
+					  						<div style="color: green;">Anda Sedang Cuti</div>
+					  						<hr>
+					  					<?php endif;?>
 					  					<?php if($dataStatus == "Teaching"):?>
-					  					<div><button id="addHistory" class="btn btn-xs btn-info">Show/Hide Form Add</button></div>
+					  					<div>
+					  					    <div style="color: #038d3d;">Nota : Apabila telah menyelesaikan proses bimbingan, harap hubungi admin untuk mengganti status!<br></div>
+					  					    <button id="addHistory" class="btn btn-xs btn-info">Show/Hide Form Add</button></div>
 					  					<div>
 					  						<br>
 					  						<?php echo form_open_multipart('addHistory','id="form-fulldata"');?>
 												<div class="form-group">
 													<label for="mapel">Mata Pelajaran</label>
-													<select class="form-control" id="mapel" name="mapel" form="form-fulldata" required title="Harap Pilih">
-														<option value="" selected disabled>Pilih</option>
-														<option value="matematika">Matematika</option>
-														<option value="bindo">Bahasa Indonesia</option>
-														<option value="binggi">Bahasa Inggris</option>
-														<option value="biologi">Biologi</option>
-														<option value="fisika">Fisika</option>
-														<option value="kimia">Kimia</option>
-														<option value="tpa">Tes Potensi Akademik</option>
-														<option value="ipa">IPA Terpadu</option>
-													</select>
+													<input type="text" class="form-control" name="mapel" id="mapel" value="<?php echo $dataInfo->Mapel?>" readonly>
 												</div>
 					  							<div class="form-group">
 													<label for="materi">Materi</label>
@@ -118,7 +127,7 @@
 					  					<div>
 					  						<?php 
 					  						echo '<h4>Data Siswa</h4><br>';
-					  						echo '
+					  						echo '<div class="table-responsive">
 						  						<table cellpadding="0" cellspacing="0" class ="table table-bordered" border="0" >
 						  							<thead>
 						  								<tr>
@@ -169,7 +178,7 @@
 						  								</tr>
 						  							</tbody>
 						  						</table>
-
+						  						</div>
 					  						';
 					  						?>
 					  					</div>
@@ -194,10 +203,6 @@
 												?>
 											</tbody>
 										</table>
-					  					<?php endif;?>
-					  					<?php if($dataStatus != "Teaching"):?>
-					  						<div style="color: red;">Anda Tidak Memiliki Murid Saat Ini!</div>
-					  						<hr>
 					  					<?php endif;?>
 					  				</div>
 					  			</div>
@@ -244,6 +249,67 @@
     <script src="<?php echo base_url();?>assets/admin/js/custom.js"></script>
     <script src="<?php echo base_url();?>assets/admin/js/tables.js"></script>
     <script src="<?php echo base_url();?>assets/admin/js/forms.js"></script>
+    <script>
+    	$(document).ready(function(){
+    		$('.btn-vacation').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>Admin_Page/vacation",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							alert("Success!");
+							location.reload();
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-endvacation').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>Admin_Page/endVacation",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							alert("Success!");
+							location.reload();
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+			$('.btn-addQuota').click(function(event){
+				if(confirm("Are You Sure?")){
+					var thisOne = $(this);
+					var id = $(this).val();
+					$.ajax({
+						url: "<?php echo base_url();?>Admin_Page/addQuota",
+						method: "POST",
+						data: {ID: id },
+						success: function(response){
+							alert("Success!");
+							location.reload();
+						},
+						error: function(tr){
+							$('#testError').html(tr.responseText)
+						}
+
+					});
+				}
+			});
+    	});
+    </script>
     <script>
 		$(document).ready(function (){
 			$('#form-fulldata').hide();
